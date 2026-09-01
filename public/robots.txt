@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://admisi.universitas-bth.ac.id/sitemap.xml
+
+Crawl-delay: 1

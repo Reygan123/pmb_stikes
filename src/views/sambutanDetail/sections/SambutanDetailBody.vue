@@ -1,0 +1,11 @@
+<script setup lang="ts">
+defineProps({
+    description: String
+})
+</script>
+
+<template>
+    <section class="px-4 md:px-8 lg:px-24 text-left">
+        <p class="text-sm md:text-base" v-html="'Di era disrupsi yang penuh tantangan dan peluang ini, kami mengemban visi besar: menjadi universitas yang unggul, inovatif, dan berdaya saing global. Visi ini kami wujudkan melalui komitmen utama kami, `Transforming New Generation`. Ini bukan sekadar slogan, melainkan janji kami untuk mentransformasi setiap mahasiswa menjadi individu yang utuh—pribadi yang tidak hanya menguasai ilmu di bidang Kesehatan, Teknologi, dan Bisnis, tetapi juga memiliki pola pikir yang terbuka, kreatif, dan siap menjadi agen perubahan. Untuk mencapai hal tersebut, kami menerapkan sistem pendidikan holistik yang memadukan fondasi teori yang kokoh dengan praktik langsung yang relevan dengan kebutuhan industri. Proses belajar-mengajar didukung oleh jajaran dosen ahli dan praktisi berpengalaman, serta ditunjang oleh fasilitas modern dan ekosistem digital yang kami kembangkan untuk mendorong lahirnya inovasi dan kolaborasi. Lulusan Universitas BTH adalah cerminan dari dedikasi kami. Kami tidak hanya bertujuan mencetak tenaga kerja yang siap pakai, tetapi juga para pemimpin masa depan yang memiliki kompetensi teknis yang tinggi, karakter entrepreneur yang tangguh, dan yang terpenting, akhlak mulia serta integritas yang menjadi pegangan hidup. Mereka adalah generasi yang kami siapkan untuk berkontribusi secara nyata bagi kemajuan bangsa dan kemanusiaan. Saya mengundang Anda—putra-putri terbaik bangsa, para orang tua yang memercayakan pendidikan putra-putrinya, serta para mitra strategis—untuk menjelajahi lebih dalam apa yang kami tawarkan. Mari bergabung dengan keluarga besar Universitas Bakti Tunas Husada dan bersama-sama kita wujudkan masa depan Indonesia yang lebih cerah. Terima kasih Wassalamualaikum Warahmatullahi Wabarakatuh. Hormat saya, [Nama Lengkap Rektor beserta Gelar] Rektor Universitas Bakti Tunas Husada'"></p>
+    </section>
+</template>
