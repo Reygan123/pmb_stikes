@@ -7,6 +7,10 @@ import type { Akreditasi } from '@/core/types/akreditasi';
 import ErrorSection from '@/components/sections/ErrorSection.vue';
 import EmptySection from '@/components/sections/EmptySection.vue';
 import ListAkreditasiSkeleton from '@/components/sections/skeletons/ListAkreditasiSkeleton.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
+
 defineProps<{
     akreditasi: Akreditasi[],
     loading: boolean,
@@ -26,14 +30,14 @@ defineProps<{
     <section v-if="!loading && !error && akreditasi?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="Dokumen" />
-            <Title title="Akreditasi" />
-            <Subtitle text="Universitas Bakti Tunas Husada" />
+            <Tag :title="langStore.currentLang === 'en' ? 'Accreditation Documents' : 'Dokumen Akreditasi'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Official Program & Institutional Accreditations' : 'Status Akreditasi Resmi'" />
+            <Subtitle text="STIKes Budi Luhur Cimahi" />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="(item, index) in akreditasi" :key="index" data-aos="fade-up"
                 :data-aos-duration="200 + (index * 200)">
-                <AkreditasiCard :title="item.title" :link="item.file || ''" />
+                <AkreditasiCard :title="langStore.loc(item.title)" :link="item.file || ''" />
             </div>
         </div>
     </section>

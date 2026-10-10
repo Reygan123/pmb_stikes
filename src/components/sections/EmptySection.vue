@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Maskot from '@/assets/vector/maskot-kosong.webp'
+import Logo from '@/assets/logo/logo.png';
 import Title from '../ui/Title.vue';
 
 defineProps({
@@ -8,13 +8,9 @@ defineProps({
 </script>
 
 <template>
-    <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-6 md:gap-8 min-h-[400px] md:min-h-[500px]">
-        <div class="">
-            <img 
-                :src="Maskot" 
-                alt="Maskot Error" 
-                class="w-56 h-56 md:w-60 md:h-60 lg:w-72 lg:h-72 xl:w-80 xl:h-80 object-contain animate-fade-in"
-            >
+    <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-6 md:gap-8 min-h-[360px] md:min-h-[440px]">
+        <div class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center animate-fade-in opacity-80">
+            <img :src="Logo" alt="Logo STIKes Budi Luhur Cimahi" class="w-full h-full object-contain">
         </div>
         
         <div class="space-y-3 md:space-y-4 animate-slide-up">

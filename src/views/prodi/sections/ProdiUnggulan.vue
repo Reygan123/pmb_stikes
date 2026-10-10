@@ -6,6 +6,9 @@ import Subtitle from '@/components/ui/Subtitle.vue';
 import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import type { Unggulan } from '@/core/types/prodi';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     usp: Unggulan[],
@@ -31,9 +34,9 @@ defineProps<{
     <section v-if="!loading && !error && usp?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
         <div class="w-full flex flex-col items-center gap-4">
-            <Tag :title="`Keunggulan ${name}`" />
-            <Title :title="`Mengapa Memilih ${name}?`" />
-            <Subtitle text="Membentuk generasi siap kerja yang inovatif dan berkarakter." />
+            <Tag :title="langStore.currentLang === 'en' ? `Advantages of ${name}` : `Keunggulan ${name}`" />
+            <Title :title="langStore.currentLang === 'en' ? `Why Choose ${name}?` : `Mengapa Memilih ${name}?`" />
+            <Subtitle :text="langStore.currentLang === 'en' ? 'Educating innovative, ethical, and career-ready healthcare professionals.' : 'Membentuk generasi siap kerja yang inovatif dan berkarakter.'" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 lg:px-16 xl:px-28">
@@ -64,8 +67,8 @@ defineProps<{
                 </div>
 
                 <div class="space-y-1">
-                    <h4 class="text-base lg:text-lg text-primary font-medium">{{ item.title }}</h4>
-                    <p class="text-sm" v-html="item.description"></p>
+                    <h4 class="text-base lg:text-lg text-primary font-medium">{{ langStore.loc(item.title, item.title_en) }}</h4>
+                    <p class="text-sm" v-html="langStore.loc(item.description, item.description_en)"></p>
                 </div>
             </div>
         </div>

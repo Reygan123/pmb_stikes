@@ -8,6 +8,10 @@ import EmptySection from '@/components/sections/EmptySection.vue';
 import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import Subtitle from '@/components/ui/Subtitle.vue';
+import Button from '@/components/ui/Button.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     fasilitas: Fasilitas[],
@@ -38,9 +42,11 @@ const navigateToFasilitas = () => {
     <section v-if="!loading && !error && fasilitas?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="Fasilitas" />
-            <Title title="Sarana & Prasarana Pendidikan" />
-            <Subtitle text="Rasakan pengalaman belajar yang didukung oleh teknologi terkini. Dari laboratorium canggih hingga ruang-ruang diskusi yang nyaman, semua kami siapkan untuk membantumu fokus meraih prestasi terbaik." />
+            <Tag :title="langStore.currentLang === 'en' ? 'Facilities' : 'Fasilitas'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Educational Infrastructure & Facilities' : 'Sarana & Prasarana Pendidikan'" />
+            <Subtitle :text="langStore.currentLang === 'en' 
+                ? 'Experience modern healthcare learning supported by cutting-edge technology, dedicated clinical simulation laboratories, and collaborative study spaces.' 
+                : 'Rasakan pengalaman belajar yang didukung oleh teknologi terkini. Dari laboratorium canggih hingga ruang-ruang diskusi yang nyaman, semua kami siapkan untuk membantumu fokus meraih prestasi terbaik.'" />
         </div>
 
         <!-- Tablet & Dekstop -->
@@ -55,7 +61,7 @@ const navigateToFasilitas = () => {
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[0]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[0]?.title) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -66,7 +72,7 @@ const navigateToFasilitas = () => {
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[1]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[1]?.title) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -77,7 +83,7 @@ const navigateToFasilitas = () => {
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[2]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[2]?.title) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -88,7 +94,7 @@ const navigateToFasilitas = () => {
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[3]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[3]?.title) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -99,60 +105,60 @@ const navigateToFasilitas = () => {
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[4]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[4]?.title) }}</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <Button @click="navigateToFasilitas" text="Selengkapnya" />
+            <Button @click="navigateToFasilitas" :text="langStore.t('common.read_more')" />
         </div>
 
         <!-- Mobile -->
         <div data-aos="fade-up" data-aos-duration="1000" class="w-full space-y-4 lg:hidden">
             <div class="w-full h-[180px] grid grid-cols-2 gap-4">
                 <div class="w-full h-full overflow-hidden relative">
-                    <img :src="getImageUrl(`facilities/${fasilitas[0]?.image}` || '')" :alt="fasilitas[0]?.title || ''"
+                    <img :src="getImageUrl(`facilities/${(fasilitas[0]?.image || fasilitas[0]?.image1)}` || '')" :alt="fasilitas[0]?.title || ''"
                         class="w-full h-full rounded-3xl object-cover">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-3xl">
                         <div class="h-fit p-4 text-white w-full">
-                            <h3 class="text-base md:text-lg font-medium">{{ fasilitas[0]?.title }}</h3>
+                            <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[0]?.title) }}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="w-full h-full overflow-hidden relative">
-                    <img :src="getImageUrl(`facilities/${fasilitas[1]?.image}` || '')" :alt="fasilitas[1]?.title || ''"
+                    <img :src="getImageUrl(`facilities/${(fasilitas[1]?.image || fasilitas[1]?.image1)}` || '')" :alt="fasilitas[1]?.title || ''"
                         class="w-full h-full rounded-3xl object-cover">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-3xl">
                         <div class="h-fit p-4 text-white w-full">
-                            <h3 class="text-base md:text-lg font-medium">{{ fasilitas[1]?.title }}</h3>
+                            <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[1]?.title) }}</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="w-full h-[180px] flex items-center gap-4">
                 <div class="w-[70%] h-full overflow-hidden relative">
-                    <img :src="getImageUrl(`facilities/${fasilitas[2]?.image}` || '')" :alt="fasilitas[2]?.title || ''"
+                    <img :src="getImageUrl(`facilities/${(fasilitas[2]?.image || fasilitas[2]?.image1)}` || '')" :alt="fasilitas[2]?.title || ''"
                         class="w-full h-full rounded-3xl object-cover">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-3xl">
                         <div class="h-fit p-4 text-white w-full">
-                            <h3 class="text-base md:text-lg font-medium">{{ fasilitas[2]?.title }}</h3>
+                            <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[2]?.title) }}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="w-[30%] h-full bg-gstart overflow-hidden rounded-3xl relative" @click="navigateToFasilitas">
                     <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                            <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#F03C06"
+                            <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#005EB8"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
 
                     <div class="absolute p-4 bottom-0 text-white">
-                        <p class="text-xs">Selengkapnya</p>
+                        <p class="text-xs">{{ langStore.t('common.read_more') }}</p>
                     </div>
                 </div>
             </div>
@@ -163,7 +169,7 @@ const navigateToFasilitas = () => {
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-3xl">
                         <div class="h-fit p-4 text-white w-full">
-                            <h3 class="text-base md:text-lg font-medium">{{ fasilitas[3]?.title }}</h3>
+                            <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[3]?.title) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -173,7 +179,7 @@ const navigateToFasilitas = () => {
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-3xl">
                         <div class="h-fit p-4 text-white w-full">
-                            <h3 class="text-base md:text-lg font-medium">{{ fasilitas[4]?.title }}</h3>
+                            <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[4]?.title) }}</h3>
                         </div>
                     </div>
                 </div>

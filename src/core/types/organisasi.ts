@@ -10,7 +10,9 @@ export interface Organization {
   id: number;
   kategori_id: number | null;
   title: string;
+  title_en?: string;
   description: string;
+  description_en?: string;
   image: string;
   created_at: string;
   updated_at: string;

@@ -70,13 +70,13 @@ const modules = [Navigation, Pagination, Autoplay];
                 <Title title="Capaian dan <br/> Prestasi" />
                 <div class="md:hidden">
                     <Subtitle
-                        text="Kontribusi dan keunggulan civitas academik mahasiswa Universitas Bakti Tunas Husada" />
+                        text="Kontribusi dan keunggulan civitas academik mahasiswa STIKes Budi Luhur Cimahi" />
                 </div>
                 <Button @click="navigateToDetail" text="Selengkapnya" />
             </div>
 
             <div class="max-w-sm hidden md:block">
-                <Subtitle text="Kontribusi dan keunggulan civitas academik mahasiswa Universitas Bakti Tunas Husada" />
+                <Subtitle text="Kontribusi dan keunggulan civitas academik mahasiswa STIKes Budi Luhur Cimahi" />
             </div>
         </div>
 

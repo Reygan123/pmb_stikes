@@ -5,6 +5,9 @@ import RecCardSkeleton from '@/components/sections/skeletons/RecCardSkeleton.vue
 import Title from '@/components/ui/Title.vue';
 import type { Post } from '@/core/types/post';
 import RecCard from '@/views/beranda/components/RecCard.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     berita: Post[]
@@ -13,22 +16,7 @@ defineProps<{
 }>()
 
 const formatDate = (dateString: string | undefined): string => {
-    if (!dateString) return '';
-    
-    const parts = dateString.split('-');
-    if (parts.length !== 3) return dateString;
-
-    const [year, month, day] = parts;
-    const monthNames = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-
-    const monthIndex = parseInt(month, 10) - 1;
-
-    if (monthIndex < 0 || monthIndex > 11) return dateString;
-
-    return `${day} ${monthNames[monthIndex]} ${year}`;
+    return langStore.formatDate(dateString);
 }
 </script>
 
@@ -58,11 +46,11 @@ const formatDate = (dateString: string | undefined): string => {
     </div>
 
     <section v-if="!loading && !error && berita?.length > 0" class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
-        <Title title="Must-Read Post" />
+        <Title :title="langStore.currentLang === 'en' ? 'Must-Read Articles' : 'Artikel Pilihan'" />
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
             <div v-for="(item, index) in berita" :key="index">
-                <RecCard :category="item.category.name" :title="item.title" :description="item.description"
+                <RecCard :category="langStore.loc(item.category.name)" :title="langStore.loc(item.title, item.title_en)" :description="langStore.loc(item.description, item.description_en)"
                     :date="formatDate(item.pub_date)" :slug="item.slug"/>
             </div>
         </div>

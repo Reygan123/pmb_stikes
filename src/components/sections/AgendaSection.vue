@@ -9,7 +9,7 @@ import Title from '../ui/Title.vue';
     <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="flex flex-col justify-center items-center gap-4">
             <Tag title="Agenda" />
-            <Title title="Agenda U-BTH" />
+            <Title title="Agenda STIKes Budi Luhur" />
             <Subtitle text="Jadwal seminar, lokakarya, dan berbagai kegiatan akademik universitas." />
         </div>
 
@@ -43,7 +43,7 @@ import Title from '../ui/Title.vue';
 
                     <div class="space-y-4 w-fit">
                         <div class="">
-                            <h5 class="text-base md:text-lg lg:text-2xl font-bold flex items-center gap-4">Acara di BTH
+                            <h5 class="text-base md:text-lg lg:text-2xl font-bold flex items-center gap-4">Acara di STIKes Budi Luhur
                                 <span class="px-2 py-1 lg:px-4 lg:py-2 text-xs md:text-sm font-medium bg-red-500 text-white rounded-full">Sold
                                     Out</span></h5>
                             <p class="text-xs lg:text-sm">Bandung</p>

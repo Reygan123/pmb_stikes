@@ -4,16 +4,21 @@ import ErrorSection from '@/components/sections/ErrorSection.vue';
 import ProdiHeroSkeleton from '@/components/sections/skeletons/ProdiHeroSkeleton.vue';
 import Button from '@/components/ui/Button.vue';
 import Subtitle from '@/components/ui/Subtitle.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     title: string,
     prodi: string,
     description: string,
-    // contact: string,
     image: string,
     loading: boolean,
     error: string | null
 }>()
+
+const handleWhatsApp = (_prodiName: string) => {
+};
 </script>
 
 <template>
@@ -26,7 +31,7 @@ defineProps<{
     </div>
 
     <div v-if="loading === false && title === null">
-        <EmptySection name="Testimoni" />
+        <EmptySection name="Prodi" />
     </div>
 
     <section v-if="!loading && !error && title !== null"
@@ -37,14 +42,14 @@ defineProps<{
             </h1>
             <Subtitle :text="description" />
             <div class="w-full flex justify-center items-center gap-3">
-                <Button border="border-1" border-color="border-[#0000001F]" bg-color="bg-white"
-                    text-color="text-[#5B616D]" text="Hubungi Kami" />
-                <Button onclick="window.open('http://pendaftaran.universitas-bth.ac.id/', '_blank')" :text="'Daftar Sekarang'" />
+                <Button @click="handleWhatsApp(prodi)" border="border-1" border-color="border-[#0000001F]" bg-color="bg-white"
+                    text-color="text-[#5B616D]" :text="langStore.t('common.contact_us')" />
+                <Button  :text="langStore.t('hero.cta_register')" />
             </div>
         </div>
 
         <div class="w-full h-[300px] md:h-[360px] lg:h-[600px]">
-            <div class="w-full h-full rounded-4xl overflow-hidden">
+            <div class="w-full h-full rounded-4xl overflow-hidden shadow-sm">
                 <img :src="image" :alt="title" loading="lazy" class="w-full h-full object-cover object-[20%_20%]">
             </div>
         </div>

@@ -18,7 +18,10 @@ import { useFakultasStore } from '@/stores/fakultas';
 import { useTeamStore } from '@/stores/team';
 import SejarahSection from './sections/SejarahSection.vue';
 import SeoMeta from '@/components/ui/SeoMeta.vue';
+import { useLanguageStore } from '@/stores/language';
+import { watch } from 'vue';
 
+const langStore = useLanguageStore();
 const statistikStore = useStatistikStore()
 const aboutStore = useAboutStore()
 const fakultasStore = useFakultasStore()
@@ -27,7 +30,7 @@ const partnerStore = usePartnerStore();
 const teamStore = useTeamStore();
 const testimoniStore = useTestimoniStore();
 
-onMounted(async () => {
+const loadData = async () => {
     await Promise.all([
         statistikStore.fetchStatistik(),
         aboutStore.fetchAbout(),
@@ -37,15 +40,18 @@ onMounted(async () => {
         teamStore.fetchTeamHome(),
         testimoniStore.fetchTestimoniHome(),
     ]);
-})
+};
+
+onMounted(loadData);
+watch(() => langStore.currentLang, loadData);
 
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Bangun Masa Depan Gemilang Di Universitas Bakti Tunas Husada Mencetak Profesional yang Inovatif Berkarakter di Bidang Kesehatan, Teknologi, dan Bisnis"
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/favicon.png",
+    "description": "Bangun Masa Depan Gemilang di STIKes Budi Luhur Cimahi - Mencetak Tenaga Kesehatan Profesional, Unggul, dan Berkarakter"
 };
 
 useHead({
@@ -59,19 +65,21 @@ useHead({
 </script>
 
 <template>
-    <SeoMeta title="Beranda"
-        description="Bangun Masa Depan Gemilang Di Universitas Bakti Tunas Husada Mencetak Profesional yang Inovatif Berkarakter di Bidang Kesehatan, Teknologi, dan Bisnis"
-        keywords="Visi Misi BTH, Sejarah Kampus, Profil Universitas BTH" :meta-tags="[
+    <SeoMeta title="Tentang Kami"
+        description="Bangun Masa Depan Gemilang di STIKes Budi Luhur Cimahi - Mencetak Tenaga Kesehatan Profesional, Unggul, dan Berkarakter"
+        keywords="Visi Misi STIKes, Sejarah Kampus, Profil STIKes Budi Luhur Cimahi" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>
         <TentangHero />
         <AboutSection :loading="aboutStore.loading" :error="aboutStore.error"
-            :img="getImageUrl(`identities/${aboutStore.about?.image1}` || '')" :tag="'Tentang Universitas BTH'"
-            :title="aboutStore.about?.title || ''" :subtitle="'Selamat Datang di Universitas BTH'"
-            :description="aboutStore?.about?.content || ''" :video="aboutStore.about?.video || ''" :status="'hidden'" />
+            :img="getImageUrl(`identities/${aboutStore.about?.image1}` || '')" 
+            :tag="langStore.currentLang === 'en' ? 'About STIKes Budi Luhur Cimahi' : 'Tentang STIKes Budi Luhur Cimahi'"
+            :title="langStore.currentLang === 'en' ? (aboutStore.about?.title_en || 'Profile of STIKes Budi Luhur Cimahi') : (aboutStore.about?.title || 'Profil STIKes Budi Luhur Cimahi')" 
+            :subtitle="langStore.currentLang === 'en' ? 'Welcome to STIKes Budi Luhur Cimahi' : 'Selamat Datang di STIKes Budi Luhur Cimahi'"
+            :description="langStore.currentLang === 'en' ? (aboutStore.about?.description_en || aboutStore?.about?.content || '') : (aboutStore?.about?.content || '')" :video="aboutStore.about?.video || ''" :status="'hidden'" />
         <StatistikSection :statistik="statistikStore.statistik" />
         <SejarahSection />
         <KemitraanSection :loading="partnerStore.loading" :error="partnerStore.error" :mitra="partnerStore.partners" />

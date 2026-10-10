@@ -3,6 +3,8 @@ export interface Unggulan {
   id_departement: number | null;
   title: string;
   description: string;
+  title_en?: string;
+  description_en?: string;
   image: string;
   home?: string | null;
   created_at: string;

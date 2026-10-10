@@ -25,10 +25,10 @@ onMounted(async () => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Universitas BTH mengembangkan pendidikan berbasis Ekosistem Kolaborasi, di mana Fakultas Ilmu Kesehatan, Farmasi, serta Teknologi dan Bisnis bersinergi dalam satu lingkungan akademik. Pendekatan ini membiasakan mahasiswa bekerja dalam tim multidisiplin untuk menyelesaikan tantangan nyata, sejalan dengan komitmen kami terhadap pendidikan inovatif berstandar global."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/favicon.png",
+    "description": "STIKes Budi Luhur Cimahi mengembangkan pendidikan tinggi kesehatan unggul dengan program studi keperawatan dan kebidanan berstandar nasional dan global."
 };
 
 const faqStructuredData = {
@@ -37,15 +37,15 @@ const faqStructuredData = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di Universitas BTH?",
+            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi pmb.universitas-bth.ac.id dengan mengisi formulir dan mengunggah berkas yang diperlukan."
+                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi stikesbudiluhurcimahi.ac.id dengan mengisi formulir dan mengunggah berkas yang diperlukan."
             }
         },
         {
             "@type": "Question",
-            "name": "Apa saja syarat pendaftaran PMB Universitas BTH?",
+            "name": "Apa saja syarat pendaftaran PMB STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Syarat pendaftaran meliputi scan ijazah/raport, kartu keluarga, pas foto terbaru, dan biaya pendaftaran sesuai jalur yang dipilih."
@@ -53,10 +53,10 @@ const faqStructuredData = {
         },
         {
             "@type": "Question",
-            "name": "Apakah Universitas BTH sudah terakreditasi?",
+            "name": "Apakah STIKes Budi Luhur Cimahi sudah terakreditasi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ya, Universitas BTH dan seluruh program studinya telah terakreditasi oleh BAN-PT dan LAM-PTKes."
+                "text": "Ya, STIKes Budi Luhur Cimahi dan seluruh program studinya telah terakreditasi oleh LAM-PTKes dan BAN-PT."
             }
         }
     ]
@@ -77,10 +77,10 @@ useHead({
 
 <template>
     <SeoMeta title="Informasi Akademik"
-    description="Universitas BTH mengembangkan pendidikan berbasis Ekosistem Kolaborasi, di mana Fakultas Ilmu Kesehatan, Farmasi, serta Teknologi dan Bisnis bersinergi dalam satu lingkungan akademik. Pendekatan ini membiasakan mahasiswa bekerja dalam tim multidisiplin untuk menyelesaikan tantangan nyata, sejalan dengan komitmen kami terhadap pendidikan inovatif berstandar global."
-    keywords="Agenda BTH, Kalender Akademik, Acara Kampus" :meta-tags="[
+    description="STIKes Budi Luhur Cimahi mengembangkan pendidikan tinggi kesehatan unggul dengan program studi keperawatan dan kebidanan berstandar nasional dan global."
+    keywords="Informasi Akademik, STIKes Budi Luhur Cimahi, Kalender Akademik" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
     <MainLayout>

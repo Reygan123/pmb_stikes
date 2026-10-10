@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import Maskot from '@/assets/vector/maskot-error.webp'
 import Title from '../ui/Title.vue';
 </script>
 
 <template>
-    <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-6 md:gap-8 min-h-[400px] md:min-h-[500px]">
-        <div class="">
-            <img 
-                :src="Maskot" 
-                alt="Maskot Error" 
-                class="w-56 h-56 md:w-60 md:h-60 lg:w-72 lg:h-72 xl:w-80 xl:h-80 object-contain animate-fade-in"
-            >
+    <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-6 md:gap-8 min-h-[360px] md:min-h-[440px]">
+        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-red-50 flex items-center justify-center text-red-500 animate-fade-in">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
         </div>
         
         <div class="space-y-3 md:space-y-4 animate-slide-up">

@@ -66,7 +66,7 @@ const navigateToDetail = () => {
         <div class="flex flex-col justify-center items-center text-center gap-4">
             <Tag title="UKM & Organisasi" />
             <Title title="Kegiatan Kemahasiswaan" />
-            <Subtitle text="Di Universitas BTH, kamu akan menemukan teman seperjuangan, mentor yang menginspirasi, dan komunitas yang akan menjadi keluarga keduamu." />
+            <Subtitle text="Di STIKes Budi Luhur Cimahi, kamu akan menemukan teman seperjuangan, mentor yang menginspirasi, dan komunitas yang akan menjadi keluarga keduamu." />
 
             <div class="flex justify-center items-center gap-4">
                 <div v-for="category in categories" :key="category" @click="setActiveFilter(category || '')"

@@ -6,7 +6,7 @@ import FaqAkademik from '../akademik/sections/FaqAkademik.vue';
 import { useHead } from '@vueuse/head';
 import { useIdentityStore } from '@/stores/identity';
 import PembayaranHero from './sections/PembayaranHero.vue';
-import PembayaranRegistrasiUlang from './sections/PembayaranRegistrasiUlang.vue';
+// import PembayaranRegistrasiUlang from './sections/PembayaranRegistrasiUlang.vue';
 
 const identityStore = useIdentityStore()
 
@@ -19,10 +19,10 @@ onMounted(async () => {
 const orgStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi Universitas BTH terbaru."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi STIKes Budi Luhur Cimahi terbaru."
 };
 
 const faqStructuredData = {
@@ -31,26 +31,26 @@ const faqStructuredData = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di Universitas BTH?",
+            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi pmb.universitas-bth.ac.id dengan mengisi formulir dan mengunggah berkas yang diperlukan."
+                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi pmb atau langsung mendatangi sekretariat PMB STIKes Budi Luhur Cimahi."
             }
         },
         {
             "@type": "Question",
-            "name": "Apa saja syarat pendaftaran PMB Universitas BTH?",
+            "name": "Apa saja syarat pendaftaran PMB STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Syarat pendaftaran meliputi scan ijazah/raport, kartu keluarga, pas foto terbaru, dan biaya pendaftaran sesuai jalur yang dipilih."
+                "text": "Syarat pendaftaran meliputi scan ijazah/raport, kartu keluarga, pas foto terbaru, dan berkas persyaratan sesuai jalur yang dipilih."
             }
         },
         {
             "@type": "Question",
-            "name": "Apakah Universitas BTH sudah terakreditasi?",
+            "name": "Apakah STIKes Budi Luhur Cimahi sudah terakreditasi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ya, Universitas BTH dan seluruh program studinya telah terakreditasi oleh BAN-PT dan LAM-PTKes."
+                "text": "Ya, STIKes Budi Luhur Cimahi dan seluruh program studinya telah terakreditasi oleh BAN-PT dan LAM-PTKes."
             }
         }
     ]
@@ -71,16 +71,16 @@ useHead({
 </script>
 
 <template>
-    <SeoMeta title="Panduan PMB & Akreditasi Universitas BTH"
-        description="Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi Universitas BTH terbaru. Wujudkan pendidikan berkualitas Anda di BTH!."
-        keywords="panduan pmb bth, akreditasi universitas bth, status prodi bth, syarat pendaftaran bth, kualitas pendidikan" :meta-tags="[
+    <SeoMeta title="Panduan Pembayaran Registrasi Ulang STIKes Budi Luhur Cimahi"
+        description="Cek panduan pembayaran registrasi ulang penerimaan mahasiswa baru (PMB) STIKes Budi Luhur Cimahi terbaru."
+        keywords="panduan pmb stikes, registrasi ulang stikes, status prodi stikes, syarat pendaftaran stikes, kualitas pendidikan" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>
         <PembayaranHero />
-        <PembayaranRegistrasiUlang />
+        <!-- <PembayaranRegistrasiUlang /> -->
         <FaqAkademik />
     </MainLayout>
 </template>

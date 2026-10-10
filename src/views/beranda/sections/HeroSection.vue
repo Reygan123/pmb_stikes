@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import EmptySection from '@/components/sections/EmptySection.vue';
-import ErrorSection from '@/components/sections/ErrorSection.vue';
-import HeroSkeleton from '@/components/sections/skeletons/HeroSkeleton.vue';
+import { defineAsyncComponent } from 'vue';
+const EmptySection = defineAsyncComponent(() => import('@/components/sections/EmptySection.vue'));
+const ErrorSection = defineAsyncComponent(() => import('@/components/sections/ErrorSection.vue'));
+const HeroSkeleton = defineAsyncComponent(() => import('@/components/sections/skeletons/HeroSkeleton.vue'));
 import Button from '@/components/ui/Button.vue';
 import Subtitle from '@/components/ui/Subtitle.vue';
 import Tag from '@/components/ui/Tag.vue';
@@ -10,10 +11,10 @@ import type { Slider } from '@/core/types/slider';
 import type { Statistik } from '@/core/types/statistik';
 import { getImageUrl } from '@/utils/imageUtils';
 import { useRouter } from 'vue-router';
-// import Image from '@/assets/vector/maskot-countdown.png'
-// import Countdown from '@/components/sections/Countdown.vue';
+import { useLanguageStore } from '@/stores/language';
 
 const router = useRouter()
+const langStore = useLanguageStore()
 
 defineProps<{
     slider: Slider[]
@@ -28,42 +29,31 @@ const navigateToJalur = () => {
 </script>
 
 <template>
-    <div v-if="loading">
+    <div v-if="loading && (!slider || slider.length === 0)">
         <HeroSkeleton />
     </div>
 
-    <div v-if="error">
+    <div v-if="error && (!slider || slider.length === 0)">
         <ErrorSection />
     </div>
 
-    <div v-if="loading === false && slider?.length === 0">
+    <div v-if="!loading && (!slider || slider.length === 0)">
         <EmptySection name="Hero Beranda" />
     </div>
 
-    <section v-if="!loading && !error && slider?.length > 0"
+    <section v-if="slider && slider.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col-reverse lg:flex-row lg:items-center gap-8 md:gap-12 lg:gap-16 h-full">
         <div class="w-full lg:w-[45%] space-y-4 md:space-y-6 lg:space-y-8 pt-4 lg:p-0">
             <div
                 class="flex flex-col gap-4 md:gap-5 lg:gap-6 justify-center items-center text-center lg:justify-center lg:items-start lg:text-start">
-                <Tag title="PMB Universitas BTH" />
-                <Title :title="'Pendaftaran Gelombang 3 Telah Dibuka!'" />
-                <Subtitle color="text-gstart" :text="'Slot makin menipis. Yuk, daftar sekarang biar nggak pusing rebutan kursi di menit-menit terakhir.'" />
-
-                <!-- <p class="text-sm md:text-base text-gstart font-medium">Pendaftaran akan berakhir dalam : </p>
-                <Countdown class="my-4 md:my-4" target-date="2026-01-31T23:59:59">
-                  <template #left-icon>
-                    <div class="absolute left-0 top-1/2 -translate-y-1/2">
-                      <img :src="Image" alt="Maskot Countdown" class="w-[100px] h-[100px] md:w-[140px] md:h-[140px] object-contain">
-                    </div>
-                    <div class="w-[100px] md:w-[130px]"></div>
-                  </template>
-                </Countdown> -->
+                <Tag :title="langStore.t('hero.tag')" />
+                <Title :title="langStore.loc(slider[0]?.title || 'Pendaftaran Gelombang 2026/2027 Telah Dibuka!', (slider[0] as any)?.title_en || 'Academic Year 2026/2027 Admission is Now Open!')" />
+                <Subtitle color="text-gstart" :text="langStore.loc(slider[0]?.description || 'Raih masa depan gemilang bersama institusi pendidikan kesehatan unggul, religius, berbudi luhur, dan berdaya saing global.', (slider[0] as any)?.description_en || 'Achieve a brighter future in healthcare with an outstanding, character-driven, and globally competitive health sciences institute.')" />
 
                 <div class="flex items-center gap-4">
-                    <Button onclick="window.open('http://pendaftaran.universitas-bth.ac.id/', '_blank')"
-                        :text="'Daftar Sekarang'" />
-                    <Button @click="navigateToJalur" bg-color="bg-primary/20" text-color="text-primary"
-                        text="Cek Jalur & Jadwal" />
+                    <Button :text="langStore.t('hero.cta_register')" />
+                    <Button @click="navigateToJalur" bg-color="bg-primary/20" text-color="text-[#004e9a]" weight="font-medium"
+                        :text="langStore.loc('Cek Jalur & Jadwal', 'Check Tracks & Schedules')" />
                 </div>
             </div>
 
@@ -86,8 +76,8 @@ const navigateToJalur = () => {
         <!-- Dekstop -->
         <div class="w-full lg:w-[55%] lg:h-[70vh] relative hidden lg:block">
             <div class="w-full h-full">
-                <img rel="preload" as="image" fetchpriority="high" decoding="async"
-                    :src="getImageUrl(`sliders/${slider[0]?.image}`)" :alt="slider[0]?.title"
+                <img fetchpriority="high" decoding="async" width="640" height="480"
+                    :src="getImageUrl(`sliders/${slider[0]?.image || 'faculty-image/TEA25aKWZkbL1D3oiGAieMvVW2B1nxv237PJJ4f4.jpg'}`)" :alt="slider[0]?.title || 'Penerimaan Mahasiswa Baru STIKes Budi Luhur Cimahi'"
                     class="w-full h-full object-cover rounded-4xl">
             </div>
 
@@ -144,7 +134,8 @@ const navigateToJalur = () => {
         <!-- Mobile & Tablet -->
         <div class="w-full h-[60vh] lg:w-[55%] md:h-[40vh] relative lg:hidden">
             <div class="w-full h-full">
-                <img rel="preload" as="image" :src="getImageUrl(`sliders/${slider[0]?.image}`)" :alt="slider[0]?.title"
+                <img fetchpriority="high" decoding="async" width="380" height="494"
+                    :src="getImageUrl(`sliders/${slider[0]?.image || 'faculty-image/TEA25aKWZkbL1D3oiGAieMvVW2B1nxv237PJJ4f4.jpg'}`)" :alt="slider[0]?.title || 'Penerimaan Mahasiswa Baru STIKes Budi Luhur Cimahi'"
                     class="w-full h-full object-cover rounded-4xl">
             </div>
 

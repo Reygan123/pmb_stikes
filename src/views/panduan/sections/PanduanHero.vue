@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import Subtitle from '@/components/ui/Subtitle.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 </script>
 
 <template>
     <section
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-4 lg:gap-6">
         <h1 data-aos="fade-up-sm" data-aos-duration="1000"
-            class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] font-medium text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">
-            Panduan Lengkap Pendaftaran
+            class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">
+            {{ langStore.currentLang === 'en' ? 'Comprehensive Admission Guide' : 'Panduan Lengkap Pendaftaran' }}
         </h1>
         <Subtitle color="text-netral md:text-gstart"
-            text="Selamat! Kamu sudah selangkah lebih dekat untuk menjadi bagian dari keluarga besar <br/>Universitas BTH. Proses pendaftaran kami rancang agar semudah dan sejelas mungkin." />
+            :text="langStore.currentLang === 'en' 
+                ? 'Welcome! You are one step closer to joining the academic family of STIKes Budi Luhur Cimahi. Our admission process is streamlined for clarity and ease.'
+                : 'Selamat! Kamu sudah selangkah lebih dekat untuk menjadi bagian dari keluarga besar <br/>STIKes Budi Luhur Cimahi. Proses pendaftaran kami rancang agar semudah dan sejelas mungkin.'" />
         <div>
             <div class="scrolldown">
                 <div class="chevrons">
@@ -24,7 +29,7 @@ import Subtitle from '@/components/ui/Subtitle.vue';
 
 <style scoped>
 .scrolldown {
-    --color: #DF571D;
+    --color: #005EB8;
     --sizeX: 30px;
     --sizeY: 50px;
     position: relative;

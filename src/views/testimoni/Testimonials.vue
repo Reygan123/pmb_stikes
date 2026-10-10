@@ -8,10 +8,10 @@ import SeoMeta from '@/components/ui/SeoMeta.vue';
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa Universitas BTH."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/favicon.png",
+    "description": "Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa STIKes Budi Luhur Cimahi."
 };
 
 useHead({
@@ -26,10 +26,10 @@ useHead({
 
 <template>
     <SeoMeta title="Testimoni Alumni & Mahasiswa"
-        description="Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa Universitas BTH."
-        keywords="Testimoni BTH, Kisah Alumni, Pengalaman Mahasiswa BTH" :meta-tags="[
+        description="Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa STIKes Budi Luhur Cimahi."
+        keywords="Testimoni STIKes, Kisah Alumni, Pengalaman Mahasiswa STIKes Budi Luhur Cimahi" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>

@@ -9,6 +9,9 @@ import Title from '@/components/ui/Title.vue';
 import type { Fasilitas } from '@/core/types/fasilitas';
 import { getImageUrl } from '@/utils/imageUtils';
 import { ref } from 'vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     fasilitas: Fasilitas[]
@@ -39,10 +42,10 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
     <section v-if="!loading && !error && fasilitas?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="Fasilitas" />
-            <Title title="Lingkungan Belajar Modern dan Mendukung" />
+            <Tag :title="langStore.currentLang === 'en' ? 'Facilities' : 'Fasilitas'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Modern and Supportive Learning Environment' : 'Lingkungan Belajar Modern dan Mendukung'" />
             <Subtitle class="text-center"
-                text="Fasilitas unggulan yang mendukung keberhasilan akademik dan kegiatan non-akademik." />
+                :text="langStore.currentLang === 'en' ? 'Exceptional facilities designed to bolster academic achievements, research, and healthcare activities.' : 'Fasilitas unggulan yang mendukung keberhasilan akademik dan kegiatan non-akademik.'" />
         </div>
 
         <div
@@ -53,14 +56,14 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <div class="md:w-full md:text-center py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="!activeFasilitas ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="activeFasilitas = null">
-                    <p class="text-sm md:text-base xl:text-lg">All</p>
+                    <p class="text-sm md:text-base xl:text-lg">{{ langStore.currentLang === 'en' ? 'All' : 'Semua' }}</p>
                 </div>
 
                 <div v-for="item in fasilitas" :key="item.id"
                     class="md:w-full md:text-center py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="activeFasilitas?.id === item.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="setActiveFasilitas(item)">
-                    <p class="text-sm md:text-base xl:text-lg">{{ item.title }}</p>
+                    <p class="text-sm md:text-base xl:text-lg">{{ langStore.loc(item.title, item.title_en) }}</p>
                 </div>
             </div>
 
@@ -69,14 +72,14 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <div class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="!activeFasilitas ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="activeFasilitas = null">
-                    <p class="text-sm md:text-base lg:text-lg">All</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.currentLang === 'en' ? 'All' : 'Semua' }}</p>
                 </div>
 
                 <div v-for="item in fasilitas" :key="item.id"
                     class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="activeFasilitas?.id === item.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="setActiveFasilitas(item)">
-                    <p class="text-sm md:text-base lg:text-lg">{{ item.title }}</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.loc(item.title, item.title_en) }}</p>
                 </div>
             </div>
 
@@ -84,42 +87,42 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <!-- Dekstop -->
                 <div class="w-full h-full hidden lg:grid grid-cols-2 gap-10 overflow-hidden">
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${fasilitas[0]?.image1}`)" :alt="fasilitas[0]?.title"
+                        <img :src="getImageUrl(`facilities/${(fasilitas[0]?.image || fasilitas[0]?.image1)}`)" :alt="fasilitas[0]?.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[0]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[0]?.title, fasilitas[0]?.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${fasilitas[1]?.image1}`)" :alt="fasilitas[1]?.title"
+                        <img :src="getImageUrl(`facilities/${(fasilitas[1]?.image || fasilitas[1]?.image1)}`)" :alt="fasilitas[1]?.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[1]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[1]?.title, fasilitas[1]?.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${fasilitas[2]?.image1}`)" :alt="fasilitas[2]?.title"
+                        <img :src="getImageUrl(`facilities/${(fasilitas[2]?.image || fasilitas[2]?.image1)}`)" :alt="fasilitas[2]?.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[2]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[2]?.title, fasilitas[2]?.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${fasilitas[3]?.image1}`)" :alt="fasilitas[3]?.title"
+                        <img :src="getImageUrl(`facilities/${(fasilitas[3]?.image || fasilitas[3]?.image1)}`)" :alt="fasilitas[3]?.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ fasilitas[3]?.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[3]?.title, fasilitas[3]?.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -129,47 +132,47 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <div class="w-full space-y-4 md:space-y-6 lg:hidden">
                     <div class="w-full h-[180px] grid grid-cols-2 gap-4 md:gap-6">
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`facilities/${fasilitas[0]?.image1}`)" :alt="fasilitas[0]?.title"
+                            <img :src="getImageUrl(`facilities/${(fasilitas[0]?.image || fasilitas[0]?.image1)}`)" :alt="fasilitas[0]?.title"
                                 class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ fasilitas[0]?.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[0]?.title, fasilitas[0]?.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`facilities/${fasilitas[1]?.image1}`)" :alt="fasilitas[1]?.title"
+                            <img :src="getImageUrl(`facilities/${(fasilitas[1]?.image || fasilitas[1]?.image1)}`)" :alt="fasilitas[1]?.title"
                                 class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ fasilitas[1]?.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[1]?.title, fasilitas[1]?.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-[180px] grid grid-cols-1 gap-4 md:gap-6">
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`facilities/${fasilitas[2]?.image1}`)" :alt="fasilitas[2]?.title"
+                            <img :src="getImageUrl(`facilities/${(fasilitas[2]?.image || fasilitas[2]?.image1)}`)" :alt="fasilitas[2]?.title"
                                 class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ fasilitas[2]?.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[2]?.title, fasilitas[2]?.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-[180px] flex items-center gap-4 md:gap-6">
                         <div class="w-[70%] h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`facilities/${fasilitas[3]?.image1}`)" :alt="fasilitas[3]?.title"
+                            <img :src="getImageUrl(`facilities/${(fasilitas[3]?.image || fasilitas[3]?.image1)}`)" :alt="fasilitas[3]?.title"
                                 class="w-full h-full rounded-3xl object-cover">
 
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ fasilitas[3]?.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(fasilitas[3]?.title, fasilitas[3]?.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -178,12 +181,12 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                                 class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
-                                    <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#F03C06"
+                                    <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#005EB8"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                             <div class="absolute bottom-4 left-4 text-white">
-                                <p class="text-xs">Selengkapnya</p>
+                                <p class="text-xs">{{ langStore.t('common.read_more') }}</p>
                             </div>
                         </div>
                     </div>
@@ -194,42 +197,42 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <!-- Dekstop -->
                 <div class="w-full h-full hidden lg:grid grid-cols-2 gap-10 overflow-hidden">
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${activeFasilitas.image1}`)" :alt="activeFasilitas.title"
+                        <img :src="getImageUrl(`facilities/${(activeFasilitas.image || activeFasilitas.image1)}`)" :alt="activeFasilitas.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${activeFasilitas.image2}`)" :alt="activeFasilitas.title"
+                        <img :src="getImageUrl(`facilities/${(activeFasilitas.image2 || activeFasilitas.image)}`)" :alt="activeFasilitas.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${activeFasilitas.image3}`)" :alt="activeFasilitas.title"
+                        <img :src="getImageUrl(`facilities/${(activeFasilitas.image3 || activeFasilitas.image)}`)" :alt="activeFasilitas.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-56 md:h-72 lg:h-96 rounded-4xl overflow-hidden relative">
-                        <img :src="getImageUrl(`facilities/${activeFasilitas.image4}`)" :alt="activeFasilitas.title"
+                        <img :src="getImageUrl(`facilities/${(activeFasilitas.image4 || activeFasilitas.image)}`)" :alt="activeFasilitas.title"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -239,47 +242,47 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                 <div class="w-full space-y-4 md:space-y-6 lg:hidden">
                     <div class="w-full h-[180px] grid grid-cols-2 gap-4 md:gap-6">
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`/facilities/${activeFasilitas.image1}`)"
+                            <img :src="getImageUrl(`/facilities/${(activeFasilitas.image || activeFasilitas.image1)}`)"
                                 :alt="activeFasilitas.title" class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`/facilities/${activeFasilitas.image1}`)"
+                            <img :src="getImageUrl(`/facilities/${(activeFasilitas.image || activeFasilitas.image1)}`)"
                                 :alt="activeFasilitas.title" class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-[180px] grid grid-cols-1 gap-4 md:gap-6">
                         <div class="w-full h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`/facilities/${activeFasilitas.image1}`)"
+                            <img :src="getImageUrl(`/facilities/${(activeFasilitas.image || activeFasilitas.image1)}`)"
                                 :alt="activeFasilitas.title" class="w-full h-full rounded-3xl object-cover">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="w-full h-[180px] flex items-center gap-4 md:gap-6">
                         <div class="w-[70%] h-full overflow-hidden relative">
-                            <img :src="getImageUrl(`/facilities/${activeFasilitas.image1}`)"
+                            <img :src="getImageUrl(`/facilities/${(activeFasilitas.image || activeFasilitas.image1)}`)"
                                 :alt="activeFasilitas.title" class="w-full h-full rounded-3xl object-cover">
 
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-xl">
                                 <div class="h-fit p-4 text-white w-full">
-                                    <h3 class="text-base md:text-lg font-medium">{{ activeFasilitas.title }}</h3>
+                                    <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(activeFasilitas.title, activeFasilitas.title_en) }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -288,12 +291,12 @@ const setActiveFasilitas = (fasilitas: Fasilitas) => {
                                 class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
-                                    <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#F03C06"
+                                    <path d="M7 17.0137L17 7.01367M17 7.01367H9M17 7.01367V15.0137" stroke="#005EB8"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                             <div class="absolute bottom-4 left-4 text-white">
-                                <p class="text-xs">Selengkapnya</p>
+                                <p class="text-xs">{{ langStore.t('common.read_more') }}</p>
                             </div>
                         </div>
                     </div>

@@ -1,13 +1,69 @@
 @import "tailwindcss";
+@import "aos/dist/aos.css";
 
 @theme {
-  --font-display: "Poppins", "sans-serif";
-  --color-primary: #FF6321;
-  --color-netral: #A4A4A4;
+  /* Font Family Constraints */
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  
+  /* Primary Color (Menggunakan #005EB8) */
+  --color-primary: #005EB8;
+  --color-primary-500: #005EB8;
+  --color-primary-700: #004282; /* Variant lebih gelap untuk hover state */
+  --color-primary-100: #e6eff8; /* Variant lembut/terang untuk badge/pill */
+  
+  /* Color Extensions */
+  --color-secondary-500: #008080;
+  --color-accent-gold: #d4af37;
+  
+  /* Neutrals & Surfaces */
+  --color-neutral-900: #111827;
+  --color-neutral-600: #4b5563;
+  --color-slate-900: #0f172a;
+  --color-slate-400: #94a3b8;
+  --color-surface-off: #f8fafc;
+  --color-border-slate: #e2e8f0;
+  
   --color-gstart: #081B37;
   --color-gend: #174E9C;
+
+  --color-netral: #707070;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-neutral-900);
+    background-color: var(--color-surface-off);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.apple-lift {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
+}
+
+.apple-lift:hover {
+    transform: translateY(-4px);
+}
+
+.apple-press {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-press:active {
+    transform: scale(0.97);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }

@@ -20,10 +20,10 @@ onMounted(async () => {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "PMB Universitas BTH",
-  "url": "https://admisi.universitas-bth.ac.id/",
-  "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-  "description": "Jelajahi berbagai Fakultas unggulan di Universitas BTH. Temukan bidang ilmu yang sesuai dengan minat dan karir masa depan Anda."
+  "name": "PMB STIKes Budi Luhur Cimahi",
+  "url": "https://stikesbudiluhurcimahi.ac.id/",
+  "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+  "description": "Jelajahi berbagai Program Studi unggulan di STIKes Budi Luhur Cimahi. Temukan bidang ilmu kesehatan yang sesuai dengan minat dan karir masa depan Anda."
 };
 
 useHead({
@@ -37,11 +37,11 @@ useHead({
 </script>
 
 <template>
-  <SeoMeta title="Fakultas BTH"
-    description="Jelajahi berbagai Fakultas unggulan di Universitas BTH. Temukan bidang ilmu yang sesuai dengan minat dan karir masa depan Anda."
-    keywords="Fakultas BTH, Program Studi BTH, Jurusan Kuliah, Pilihan Fakultas" :meta-tags="[
+  <SeoMeta title="Program Studi STIKes Budi Luhur Cimahi"
+    description="Jelajahi berbagai Program Studi unggulan di STIKes Budi Luhur Cimahi. Temukan bidang ilmu kesehatan yang sesuai dengan minat dan karir masa depan Anda."
+    keywords="Program Studi STIKes Budi Luhur, Jurusan Kuliah Kesehatan, Pilihan Prodi, STIKes Cimahi" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
   <MainLayout>

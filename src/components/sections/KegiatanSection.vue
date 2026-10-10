@@ -10,6 +10,9 @@ import KegiatanSkeleton from './skeletons/KegiatanSkeleton.vue';
 import { getImageUrl } from '@/utils/imageUtils';
 import { useRouter } from 'vue-router';
 import Button from '../ui/Button.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const router = useRouter()
 
@@ -64,17 +67,17 @@ const navigateToDetail = () => {
     <section v-if="!loading && !error && organisasi?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="UKM & Organisasi" />
-            <Title title="Kegiatan Kemahasiswaan" />
+            <Tag :title="langStore.currentLang === 'en' ? 'Student Clubs & Activities' : 'UKM & Organisasi'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Student Life & Campus Activities' : 'Kegiatan Kemahasiswaan'" />
             <Subtitle
-                text="Di Universitas BTH, kamu akan menemukan teman seperjuangan, mentor yang menginspirasi, dan komunitas yang akan menjadi keluarga keduamu." />
+                :text="langStore.currentLang === 'en' ? 'At STIKes Budi Luhur Cimahi, find supportive peers, inspiring mentors, and vibrant communities to enrich your student life.' : 'Di STIKes Budi Luhur Cimahi, kamu akan menemukan teman seperjuangan, mentor yang menginspirasi, dan komunitas yang akan menjadi keluarga keduamu.'" />
 
             <div class="flex justify-center items-center gap-4">
                 <div v-for="category in categories" :key="category" @click="setActiveFilter(category || '')" :class="[
                     'py-2 px-3 lg:py-3 lg:px-6 rounded-full group font-medium transition-all duration-500 cursor-pointer',
                     activeFilter === category ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'
                 ]">
-                    <p class="text-sm md:text-base lg:text-lg">{{ category === 'all' ? 'All' : category }}</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ category === 'all' ? (langStore.currentLang === 'en' ? 'All' : 'Semua') : category }}</p>
                 </div>
             </div>
         </div>
@@ -84,12 +87,12 @@ const navigateToDetail = () => {
             class="w-full h-full hidden md:flex flex-col md:flex-row items-center gap-4 md:gap-12 lg:gap-16 overflow-hidden">
             <div class="w-full h-full md:w-[45%] rounded-4xl overflow-hidden relative">
                 <img :src="getImageUrl(`/organisasi/${organisasi[activeIndex]?.image}`)"
-                    :alt="organisasi[activeIndex]?.title" class="w-full h-64 md:h-80 lg:h-96 object-cover">
+                    :alt="organisasi[activeIndex]?.title" loading="lazy" decoding="async" width="400" height="320" class="w-full h-64 md:h-80 lg:h-96 object-cover">
 
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-4xl">
                     <div class="h-fit p-4 text-white w-full">
-                        <h3 class="text-base md:text-lg font-medium">{{ organisasi[activeIndex]?.title }}</h3>
+                        <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(organisasi[activeIndex]?.title, organisasi[activeIndex]?.title_en) }}</h3>
                     </div>
                 </div>
             </div>
@@ -100,7 +103,7 @@ const navigateToDetail = () => {
                     activeIndex === index ? 'text-gstart' : 'text-netral hover:text-gstart'
                 ]">
                     <div class="w-full flex items-center justify-between gap-4">
-                        <h4 class="text-base md:text-lg xl:text-[22px] font-medium" v-html="item.title"></h4>
+                        <h4 class="text-base md:text-lg xl:text-[22px] font-medium" v-html="langStore.loc(item.title, item.title_en)"></h4>
                         <div :class="[activeIndex === index ? 'rotate-180 transition-all duration-500' : '']">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                 fill="none">
@@ -112,7 +115,7 @@ const navigateToDetail = () => {
 
                     <div class="space-y-6 transition-all duration-500"
                         :class="[activeIndex === index ? 'w-full h-fit opacity-100' : 'w-full h-0 opacity-0']">
-                        <p class="text-sm" v-html="item.description"></p>
+                        <p class="text-sm" v-html="langStore.loc(item.description, item.description_en)"></p>
                     </div>
                 </div>
             </div>
@@ -121,12 +124,12 @@ const navigateToDetail = () => {
 
         <!-- Mobile -->
         <div class="w-full h-full md:hidden">
-            <div v-for="(item, index) in filteredOrganisasi" class="py-6 transition-all duartion-500 border-b border-[#A4A4A4]"
+            <div v-for="(item, index) in filteredOrganisasi" :key="index" class="py-6 transition-all duration-500 border-b border-gray-200"
                 @click="setActiveItem(index)"
-                :class="[activeIndex === index ? 'text-gstart space-y-2' : 'text-[#A4A4A4] space-y-0']">
+                :class="[activeIndex === index ? 'text-gstart space-y-2' : 'text-netral space-y-0']">
                 <div class="w-full flex justify-between items-center">
                     <div class="">
-                        <h3 class="text-base">{{ item.title }}</h3>
+                        <h3 class="text-base">{{ langStore.loc(item.title, item.title_en) }}</h3>
                     </div>
                     <div :class="[activeIndex === index ? 'rotate-180 transition-all duration-500' : '']">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -137,14 +140,14 @@ const navigateToDetail = () => {
                 </div>
                 <div class="space-y-6 transition-all duration-500"
                     :class="[activeIndex === index ? 'w-full h-fit opacity-100' : 'w-full h-0 opacity-0']">
-                    <p class="text-sm" v-html="item.description"></p>
+                    <p class="text-sm" v-html="langStore.loc(item.description, item.description_en)"></p>
                     <div class="w-full h-[200px] overflow-hidden rounded-4xl relative">
                         <img :src="getImageUrl(`/organisasi/${item.image}`)" :alt="item.title" loading="lazy"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-4xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ item.title }}</h3>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(item.title, item.title_en) }}</h3>
                             </div>
                         </div>
                     </div>
@@ -152,6 +155,6 @@ const navigateToDetail = () => {
             </div>
         </div>
 
-        <Button class="w-fit mx-auto" @click="navigateToDetail" text="Selengkapnya" />
+        <Button class="w-fit mx-auto" @click="navigateToDetail" :text="langStore.t('common.read_more')" />
     </section>
 </template>

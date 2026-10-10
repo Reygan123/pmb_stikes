@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Subtitle from '@/components/ui/Subtitle.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 </script>
 
 <template>
@@ -7,10 +10,12 @@ import Subtitle from '@/components/ui/Subtitle.vue';
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-4 lg:gap-6">
         <h1 data-aos="fade-up-sm" data-aos-duration="1000"
             class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] font-medium text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">
-            Panduan Pembayaran Registrasi Ulang
+            {{ langStore.currentLang === 'en' ? 'Re-registration Payment Guide' : 'Panduan Pembayaran Registrasi Ulang' }}
         </h1>
         <Subtitle color="text-netral md:text-gstart"
-            text="Selamat dinyatakan lulus seleksi! Selesaikan langkah terakhirmu dengan melakukan <br/>pembayaran registrasi ulang agar status mahasiswamu resmi terdaftar." />
+            :text="langStore.currentLang === 'en'
+                ? 'Congratulations on passing the admission selection! Complete your final step by completing re-registration payment to confirm your official student status.'
+                : 'Selamat dinyatakan lulus seleksi! Selesaikan langkah terakhirmu dengan melakukan pembayaran registrasi ulang agar status mahasiswamu resmi terdaftar.'" />
         <div>
             <div class="scrolldown">
                 <div class="chevrons">
@@ -24,7 +29,7 @@ import Subtitle from '@/components/ui/Subtitle.vue';
 
 <style scoped>
 .scrolldown {
-    --color: #DF571D;
+    --color: #005EB8;
     --sizeX: 30px;
     --sizeY: 50px;
     position: relative;
@@ -57,18 +62,15 @@ import Subtitle from '@/components/ui/Subtitle.vue';
         opacity: 0;
         height: 6px;
     }
-
     40% {
         opacity: 1;
         height: 10px;
     }
-
     80% {
         transform: translate(0, 20px);
         height: 10px;
         opacity: 0;
     }
-
     100% {
         height: 3px;
         opacity: 0;
@@ -80,9 +82,7 @@ import Subtitle from '@/components/ui/Subtitle.vue';
     margin-left: -3px;
     margin-top: 48px;
     width: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
 .chevrondown {
@@ -94,23 +94,5 @@ import Subtitle from '@/components/ui/Subtitle.vue';
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
-}
-
-.chevrondown:nth-child(odd) {
-    animation: pulse54012 500ms ease infinite alternate;
-}
-
-.chevrondown:nth-child(even) {
-    animation: pulse54012 500ms ease infinite alternate 250ms;
-}
-
-@keyframes pulse54012 {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 0.5;
-    }
 }
 </style>

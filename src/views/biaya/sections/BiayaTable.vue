@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 interface Fee {
   payment1: string;
@@ -7,6 +10,7 @@ interface Fee {
 }
 
 interface StudyProgram {
+  fakultasKey: string;
   fakultas: string;
   name: string;
   fees: Fee[];
@@ -14,169 +18,89 @@ interface StudyProgram {
 
 const currentPage = ref(0);
 
-const studyPrograms: StudyProgram[] = [
+const studyPrograms = computed<StudyProgram[]>(() => [
+  // Rumpun Keperawatan
   {
-    fakultas: "Ilmu Kesehatan",
-    name: "Prodi DIII Keperawatan",
+    fakultasKey: 'keperawatan',
+    fakultas: langStore.t('academics.nursing_dept'),
+    name: langStore.t('study_programs_list.s1_keperawatan'),
     fees: [
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" }
+      { payment1: "5.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" }
     ]
   },
   {
-    fakultas: "Ilmu Kesehatan",
-    name: "Prodi DIII Analis Kesehatan",
+    fakultasKey: 'keperawatan',
+    fakultas: langStore.t('academics.nursing_dept'),
+    name: langStore.t('study_programs_list.d3_keperawatan'),
     fees: [
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "7.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" },
-      { payment1: "4.150.000", payment2: "4.150.000" }
+      { payment1: "5.000.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" }
     ]
   },
   {
-    fakultas: "Ilmu Kesehatan",
-    name: "Prodi DIII Refraksi Optisi",
+    fakultasKey: 'keperawatan',
+    fakultas: langStore.t('academics.nursing_dept'),
+    name: langStore.t('study_programs_list.profesi_ners'),
     fees: [
-      { payment1: "7.100.000", payment2: "4.100.000" },
-      { payment1: "7.100.000", payment2: "4.100.000" },
-      { payment1: "7.100.000", payment2: "4.100.000" },
-      { payment1: "4.100.000", payment2: "4.100.000" },
-      { payment1: "4.100.000", payment2: "4.100.000" },
-      { payment1: "4.100.000", payment2: "4.100.000" }
+      { payment1: "8.500.000", payment2: "6.500.000" },
+      { payment1: "8.500.000", payment2: "6.500.000" }
+    ]
+  },
+
+  // Rumpun Kebidanan
+  {
+    fakultasKey: 'kebidanan',
+    fakultas: langStore.t('academics.midwifery_dept'),
+    name: langStore.t('study_programs_list.s1_kebidanan'),
+    fees: [
+      { payment1: "5.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" },
+      { payment1: "4.500.000", payment2: "3.500.000" }
     ]
   },
   {
-    fakultas: "Ilmu Kesehatan",
-    name: "Prodi S1 Administrasi Rumah Sakit",
+    fakultasKey: 'kebidanan',
+    fakultas: langStore.t('academics.midwifery_dept'),
+    name: langStore.t('study_programs_list.d3_kebidanan'),
     fees: [
-      { payment1: "4.750.000", payment2: "2.750.000" },
-      { payment1: "4.750.000", payment2: "2.750.000" },
-      { payment1: "4.750.000", payment2: "2.750.000" },
-      { payment1: "2.750.000", payment2: "2.750.000" },
-      { payment1: "2.750.000", payment2: "2.750.000" },
-      { payment1: "2.750.000", payment2: "2.750.000" },
-      { payment1: "2.750.000", payment2: "2.750.000" },
-      { payment1: "2.750.000", payment2: "2.750.000" }
+      { payment1: "5.000.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" },
+      { payment1: "4.250.000", payment2: "3.250.000" }
     ]
   },
   {
-    fakultas: "Ilmu Kesehatan",
-    name: "Prodi S1 Keperawatan",
+    fakultasKey: 'kebidanan',
+    fakultas: langStore.t('academics.midwifery_dept'),
+    name: langStore.t('study_programs_list.profesi_bidan'),
     fees: [
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" },
-      { payment1: "4.100.000", payment2: "3.350.000" }
-    ]
-  },
-  {
-    fakultas: "Farmasi",
-    name: "Prodi S1 Farmasi",
-    fees: [
-      { payment1: "7.650.000", payment2: "3.650.000" },
-      { payment1: "7.650.000", payment2: "3.650.000" },
-      { payment1: "6.650.000", payment2: "3.650.000" },
-      { payment1: "3.650.000", payment2: "3.650.000" },
-      { payment1: "3.650.000", payment2: "3.650.000" },
-      { payment1: "3.650.000", payment2: "3.650.000" },
-      { payment1: "3.650.000", payment2: "3.650.000" },
-      { payment1: "3.650.000", payment2: "3.650.000" }
-    ]
-  },
-  {
-    fakultas: "Farmasi",
-    name: "Prodi Pendidikan Profesi Apoteker (PSPPA) - Alumni",
-    fees: [
-      { payment1: "20.750.000", payment2: "20.750.000" }
-    ]
-  },
-  {
-    fakultas: "Farmasi",
-    name: "Prodi Pendidikan Profesi Apoteker (PSPPA) - Non Alumni",
-    fees: [
-      { payment1: "21.750.000", payment2: "21.750.000" }
-    ]
-  },
-  {
-    fakultas: "Farmasi",
-    name: "RPL Farmasi",
-    fees: [
-      { payment1: "5.000.000", payment2: "2.500.000" },
-      { payment1: "5.000.000", payment2: "2.500.000" },
-      { payment1: "2.500.000", payment2: "2.500.000" }
-    ]
-  },
-  {
-    fakultas: "Teknologi dan Bisnis",
-    name: "Prodi S1 Bisnis Digital",
-    fees: [
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" }
-    ]
-  },
-  {
-    fakultas: "Teknologi dan Bisnis",
-    name: "Prodi S1 Teknologi Pangan",
-    fees: [
-      { payment1: "2.550.000", payment2: "1.650.000" },
-      { payment1: "2.550.000", payment2: "1.650.000" },
-      { payment1: "2.550.000", payment2: "1.650.000" },
-      { payment1: "1.650.000", payment2: "1.650.000" },
-      { payment1: "1.650.000", payment2: "1.650.000" },
-      { payment1: "1.650.000", payment2: "1.650.000" },
-      { payment1: "1.650.000", payment2: "1.650.000" },
-      { payment1: "1.650.000", payment2: "1.650.000" }
-    ]
-  },
-  {
-    fakultas: "Teknologi dan Bisnis",
-    name: "Prodi S1 Kewirausahaan",
-    fees: [
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "2.300.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" },
-      { payment1: "1.400.000", payment2: "1.400.000" }
-    ]
-  },
-  {
-    fakultas: "Teknologi dan Bisnis",
-    name: "Prodi S1 Sistem Informasi",
-    fees: [
-      { payment1: "2.500.000", payment2: "1.600.000" },
-      { payment1: "2.500.000", payment2: "1.600.000" },
-      { payment1: "2.500.000", payment2: "1.600.000" },
-      { payment1: "1.600.000", payment2: "1.600.000" },
-      { payment1: "1.600.000", payment2: "1.600.000" },
-      { payment1: "1.600.000", payment2: "1.600.000" },
-      { payment1: "1.600.000", payment2: "1.600.000" },
-      { payment1: "1.600.000", payment2: "1.600.000" }
+      { payment1: "8.500.000", payment2: "6.500.000" },
+      { payment1: "8.500.000", payment2: "6.500.000" }
     ]
   }
-];
+]);
 
 const fakultasList = computed(() => {
   const grouped: { [key: string]: StudyProgram[] } = {};
-  studyPrograms.forEach(program => {
+  studyPrograms.value.forEach(program => {
     if (!grouped[program.fakultas]) {
       grouped[program.fakultas] = [];
     }
@@ -188,14 +112,18 @@ const fakultasList = computed(() => {
   }));
 });
 
-const currentFakultas = computed(() => fakultasList.value[currentPage.value]);
+const currentFakultas = computed(() => {
+  return fakultasList.value[currentPage.value] || fakultasList.value[0];
+});
 
 const maxSemesters = computed(() => {
+  if (!currentFakultas.value || !currentFakultas.value.programs) return 8;
   return Math.max(...currentFakultas.value.programs.map(p => p.fees.length));
 });
 
 const semesters = computed(() => {
-  return Array.from({ length: maxSemesters.value }, (_, i) => `Semester ${i + 1}`);
+  const termWord = langStore.t('biaya.term');
+  return Array.from({ length: maxSemesters.value }, (_, i) => `${termWord} ${i + 1}`);
 });
 
 const calculateGrandTotal = (program: StudyProgram) => {
@@ -221,129 +149,123 @@ const nextPage = () => {
 
 <template>
   <div class="w-full max-w-7xl mx-auto p-4">
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-gray-900">Fakultas {{ currentFakultas.name }}</h2>
-        <div class="flex gap-2">
+    <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-5 border-b border-gray-200 bg-gray-50/60">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-gray-500 font-semibold">{{ langStore.t('academics.department') }}</span>
+          <h2 class="text-xl font-bold text-gray-900">{{ currentFakultas.name }}</h2>
+        </div>
+        <div class="flex items-center gap-2">
           <button 
+            type="button"
             @click="prevPage"
-            class="p-2 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            class="p-2.5 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
             :disabled="currentPage === 0"
+            title="Sebelumnya"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700">
               <path d="m15 18-6-6 6-6"/>
             </svg>
           </button>
+          <span class="text-xs font-semibold text-gray-500 px-1">{{ currentPage + 1 }} / {{ fakultasList.length }}</span>
           <button 
+            type="button"
             @click="nextPage"
-            class="p-2 rounded-full border border-orange-500 bg-orange-500 hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            class="p-2.5 rounded-full border border-primary bg-primary hover:bg-primary-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
             :disabled="currentPage === fakultasList.length - 1"
+            title="Selanjutnya"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
               <path d="m9 18 6-6-6-6"/>
             </svg>
           </button>
         </div>
       </div>
 
+      <!-- Desktop Table -->
       <div class="hidden lg:block overflow-x-auto">
-        <table class="w-full">
+        <table class="w-full text-sm">
           <thead>
-            <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 w-64">
-                Program Studi
+            <tr class="border-b border-gray-200 bg-gray-100/60">
+              <th rowspan="2" class="px-6 py-4 text-left font-bold text-gray-800 w-64 border-r border-gray-200">
+                {{ langStore.t('common.programs') }}
               </th>
-              <th v-for="(semester, idx) in semesters" :key="idx" colspan="2" class="px-6 py-3 text-center text-sm font-medium text-gray-700 border-l border-gray-200">
+              <th 
+                v-for="(semester, index) in semesters" 
+                :key="index"
+                colspan="2" 
+                class="px-4 py-2.5 text-center font-semibold text-gray-700 border-r border-gray-200 last:border-r-0"
+              >
                 {{ semester }}
               </th>
-              <th class="px-6 py-3 text-center text-sm font-medium text-gray-700 border-l border-gray-200">
-                Total
+              <th rowspan="2" class="px-6 py-4 text-center font-bold text-gray-900 bg-blue-50/50">
+                {{ langStore.t('biaya.total') }}
               </th>
             </tr>
-            <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-6 py-3"></th>
-              <template v-for="(_, semIdx) in semesters" :key="semIdx">
-                <th class="px-6 py-3 text-center text-xs font-medium text-gray-600 border-l border-gray-200">
-                  Pembayaran 1
-                </th>
-                <th class="px-6 py-3 text-center text-xs font-medium text-gray-600">
-                  Pembayaran 2
-                </th>
+            <tr class="border-b border-gray-200 bg-gray-50">
+              <template v-for="i in maxSemesters" :key="i">
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-600 border-r border-gray-200">I</th>
+                <th class="px-3 py-2 text-center text-xs font-medium text-gray-600 border-r border-gray-200">II</th>
               </template>
-              <th class="px-6 py-3 text-center text-xs font-medium text-gray-600 border-l border-gray-200">
-                Keseluruhan
-              </th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(program, idx) in currentFakultas.programs" :key="idx" class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-              <td class="px-6 py-4 text-sm font-medium text-gray-900">
+          <tbody class="divide-y divide-gray-200">
+            <tr 
+              v-for="(program, index) in currentFakultas.programs" 
+              :key="index"
+              class="hover:bg-blue-50/30 transition-colors"
+            >
+              <td class="px-6 py-4 font-semibold text-gray-900 border-r border-gray-200">
                 {{ program.name }}
               </td>
-              <template v-for="(_, semIdx) in semesters" :key="semIdx">
-                <td class="px-6 py-4 text-sm text-gray-700 text-center border-l border-gray-200">
-                  {{ program.fees[semIdx]?.payment1 || '-' }}
-                </td>
-                <td class="px-6 py-4 text-sm text-gray-700 text-center">
-                  {{ program.fees[semIdx]?.payment2 || '-' }}
-                </td>
+              <template v-for="i in maxSemesters" :key="i">
+                <template v-if="program.fees[i - 1]">
+                  <td class="px-3 py-3 text-center text-xs text-gray-700 border-r border-gray-200 whitespace-nowrap">
+                    {{ program.fees[i - 1].payment1 }}
+                  </td>
+                  <td class="px-3 py-3 text-center text-xs text-gray-700 border-r border-gray-200 whitespace-nowrap">
+                    {{ program.fees[i - 1].payment2 }}
+                  </td>
+                </template>
+                <template v-else>
+                  <td class="px-3 py-3 text-center text-gray-400 border-r border-gray-200">-</td>
+                  <td class="px-3 py-3 text-center text-gray-400 border-r border-gray-200">-</td>
+                </template>
               </template>
-              <td class="px-6 py-4 text-sm font-bold text-gray-900 text-center border-l border-gray-200 bg-gray-50">
-                {{ calculateGrandTotal(program) }}
+              <td class="px-6 py-4 text-center font-bold text-primary bg-blue-50/30 whitespace-nowrap">
+                Rp {{ calculateGrandTotal(program) }}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="lg:hidden overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">
-                Program Studi
-              </th>
-              <th v-for="(semester, idx) in semesters" :key="idx" colspan="2" class="px-4 py-3 text-center text-sm font-medium text-gray-700 border-l border-gray-200">
-                {{ semester }}
-              </th>
-              <th class="px-4 py-3 text-center text-sm font-medium text-gray-700 border-l border-gray-200">
-                Total
-              </th>
-            </tr>
-            <tr class="bg-gray-50 border-b border-gray-200">
-              <th class="px-4 py-3"></th>
-              <template v-for="(_, semIdx) in semesters" :key="semIdx">
-                <th class="px-4 py-3 text-center text-xs font-medium text-gray-600 border-l border-gray-200">
-                  Pembayaran 1
-                </th>
-                <th class="px-4 py-3 text-center text-xs font-medium text-gray-600">
-                  Pembayaran 2
-                </th>
-              </template>
-              <th class="px-4 py-3 text-center text-xs font-medium text-gray-600 border-l border-gray-200">
-                Keseluruhan
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(program, idx) in currentFakultas.programs" :key="idx" class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-              <td class="px-4 py-4 text-sm font-medium text-gray-900">
-                {{ program.name }}
-              </td>
-              <template v-for="(_, semIdx) in semesters" :key="semIdx">
-                <td class="px-4 py-4 text-sm text-gray-700 text-center border-l border-gray-200">
-                  {{ program.fees[semIdx]?.payment1 || '-' }}
-                </td>
-                <td class="px-4 py-4 text-sm text-gray-700 text-center">
-                  {{ program.fees[semIdx]?.payment2 || '-' }}
-                </td>
-              </template>
-              <td class="px-4 py-4 text-sm font-bold text-gray-900 text-center border-l border-gray-200 bg-gray-50">
-                {{ calculateGrandTotal(program) }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Mobile & Tablet Cards -->
+      <div class="lg:hidden divide-y divide-gray-200 p-4 space-y-4">
+        <div 
+          v-for="(program, index) in currentFakultas.programs" 
+          :key="index"
+          class="p-4 bg-gray-50/70 rounded-2xl border border-gray-200 space-y-3"
+        >
+          <div class="flex justify-between items-start gap-2">
+            <h4 class="font-bold text-gray-900 text-base">{{ program.name }}</h4>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold whitespace-nowrap">
+              Rp {{ calculateGrandTotal(program) }}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-gray-200">
+            <div 
+              v-for="(fee, feeIndex) in program.fees" 
+              :key="feeIndex"
+              class="bg-white p-2.5 rounded-xl border border-gray-100"
+            >
+              <p class="font-semibold text-gray-700">{{ langStore.t('biaya.term') }} {{ feeIndex + 1 }}</p>
+              <p class="text-gray-500">I: Rp {{ fee.payment1 }}</p>
+              <p class="text-gray-500">II: Rp {{ fee.payment2 }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

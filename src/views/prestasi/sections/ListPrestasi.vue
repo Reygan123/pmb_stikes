@@ -5,6 +5,9 @@ import ListPrestasiSkeleton from '@/components/sections/skeletons/ListPrestasiSk
 import type { Prestasi } from '@/core/types/prestasi';
 import { getImageUrl } from '@/utils/imageUtils';
 import { ref, watch } from 'vue'
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     prestasi: Prestasi[],
@@ -54,8 +57,8 @@ const groupByYear = (data: Prestasi[]) => {
                     class="w-full h-96 object-cover rounded-4xl">
             </div>
             <div class="space-y-2">
-                <p class="text-lg lg:text-xl font-medium" v-html="selectedPrestasi?.title"></p>
-                <h3 class="text-base">{{ selectedPrestasi?.name }}</h3>
+                <p class="text-lg lg:text-xl font-medium" v-html="langStore.loc(selectedPrestasi?.title, selectedPrestasi?.title_en)"></p>
+                <h3 class="text-base">{{ langStore.loc(selectedPrestasi?.name, selectedPrestasi?.name_en) }}</h3>
             </div>
         </div>
 
@@ -72,14 +75,14 @@ const groupByYear = (data: Prestasi[]) => {
                                 class="flex gap-4 items-start text-netral group cursor-pointer"
                                 @click="selectPrestasi(prestasi)">
                                 <div class="space-y-3">
-                                    <h3 class="text-lg">{{ prestasi.name }}</h3>
+                                    <h3 class="text-lg">{{ langStore.loc(prestasi.name, prestasi.name_en) }}</h3>
                                     <h5 :class="[
                                         'text-xl xl:text-2xl font-semibold transition-all duration-500',
                                         selectedPrestasi?.title === prestasi.title
                                             ? 'text-gstart'
                                             : 'group-hover:text-gstart'
                                     ]">
-                                        {{ prestasi.title }}
+                                        {{ langStore.loc(prestasi.title, prestasi.title_en) }}
                                     </h5>
                                 </div>
                             </div>
@@ -101,14 +104,14 @@ const groupByYear = (data: Prestasi[]) => {
                             class="flex flex-col gap-4 text-netral group cursor-pointer" @click="selectPrestasi(prestasi)">
                             <div class="flex gap-4 items-start">
                                 <div class="space-y-3">
-                                    <h3 class="text-base">{{ prestasi.name }}</h3>
+                                    <h3 class="text-base">{{ langStore.loc(prestasi.name, prestasi.name_en) }}</h3>
                                     <h5 :class="[
                                         'text-lg font-semibold transition-all duration-500',
                                         selectedPrestasi?.title === prestasi.title
                                             ? 'text-gstart'
                                             : 'group-hover:text-gstart'
                                     ]">
-                                        {{ prestasi.title }}
+                                        {{ langStore.loc(prestasi.title, prestasi.title_en) }}
                                     </h5>
                                 </div>
                             </div>
@@ -119,7 +122,7 @@ const groupByYear = (data: Prestasi[]) => {
                                         <img :src="getImageUrl(`/prestasis/${selectedPrestasi?.image}` || '')" :alt="selectedPrestasi?.title"
                                             class="w-full h-64 object-cover rounded-4xl">
                                     </div>
-                                    <p class="text-sm" v-html="selectedPrestasi?.title"></p>
+                                    <p class="text-sm" v-html="langStore.loc(selectedPrestasi?.title, selectedPrestasi?.title_en)"></p>
                                 </div>
                             </Transition>
                         </div>

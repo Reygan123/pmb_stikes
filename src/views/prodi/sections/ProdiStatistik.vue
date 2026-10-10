@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { Departement } from '@/core/types/prodi'
 import { ref, onMounted, watch } from 'vue'
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const alumniCount = ref(0)
 const mahasiswaCount = ref(0)
@@ -70,28 +73,36 @@ onMounted(() => {
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(alumniCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">Alumni</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">
+        {{ langStore.currentLang === 'en' ? 'Alumni' : 'Alumni' }}
+      </p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(mahasiswaCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">Mahasiswa</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">
+        {{ langStore.currentLang === 'en' ? 'Students' : 'Mahasiswa' }}
+      </p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(prestasiCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">Prestasi</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">
+        {{ langStore.currentLang === 'en' ? 'Achievements' : 'Prestasi' }}
+      </p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(prodiCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">Karya Ilmiah</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">
+        {{ langStore.currentLang === 'en' ? 'Scientific Papers' : 'Karya Ilmiah' }}
+      </p>
     </div>
   </section>
 </template>

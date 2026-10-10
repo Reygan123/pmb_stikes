@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import Subtitle from '@/components/ui/Subtitle.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 </script>
 
 <template>
     <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-4 lg:gap-6">
-        <h1 class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] font-medium text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">Raih Masa Depanmu di
-            <br /> Universitas Bakti Tunas Husada
+        <h1 class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">
+            {{ langStore.currentLang === 'en' ? 'Shape Your Future at' : 'Raih Masa Depanmu di' }}
+            <br /> STIKes Budi Luhur Cimahi
         </h1>
         <Subtitle color="text-black"
-            text="Universitas modern yang melahirkan talenta profesional, inovatif, dan berkarakter di bidang Kesehatan, Teknologi, dan Bisnis." />
+            :text="langStore.currentLang === 'en' 
+                ? 'A premier health science institute cultivating competent, character-driven, and globally competitive healthcare leaders.'
+                : 'Kampus kesehatan unggulan yang melahirkan talenta profesional, mandiri, dan berkarakter budi luhur.'" />
         <div>
             <div class="scrolldown">
                 <div class="chevrons">
@@ -22,7 +28,7 @@ import Subtitle from '@/components/ui/Subtitle.vue';
 
 <style scoped>
 .scrolldown {
-    --color: #DF571D;
+    --color: #005EB8;
     --sizeX: 30px;
     --sizeY: 50px;
     position: relative;

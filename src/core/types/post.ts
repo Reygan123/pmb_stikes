@@ -1,6 +1,7 @@
 export interface Category {
   id: number;
   name: string;
+  name_en?: string;
   slug: string;
   image: string;
   created_at: string;
@@ -10,10 +11,13 @@ export interface Category {
 export interface Post {
   id: number;
   title: string;
+  title_en?: string;
   slug: string;
   category_id: number;
   description: string;
+  description_en?: string;
   content: string;
+  content_en?: string;
   image: string;
   user_id: number;
   pub_date: string;

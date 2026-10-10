@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { ref, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import Button from '../ui/Button.vue';
 import Tag from '../ui/Tag.vue';
 import Title from '../ui/Title.vue';
-import AboutSectionSkeleton from './skeletons/AboutSectionSkeleton.vue';
+const AboutSectionSkeleton = defineAsyncComponent(() => import('./skeletons/AboutSectionSkeleton.vue'));
 import Subtitle from '../ui/Subtitle.vue';
-import { ref } from 'vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     loading: boolean,
@@ -55,7 +58,7 @@ const handleVideoContainerClick = (e: MouseEvent) => {
     <section v-if="!loading"
         class="p-6 lg:py-16 lg:px-24 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         <div class="w-full md:w-[40%] relative cursor-pointer group" @click="handleVideoOpen(video)">
-            <img :src="img" :alt="tag"
+            <img :src="img" :alt="tag" loading="lazy" decoding="async" width="480" height="420"
                 class="w-full h-[300px] md:h-[420px] lg:h-[560px] object-cover object-top rounded-4xl transition-transform duration-300">
 
             <div
@@ -82,7 +85,7 @@ const handleVideoContainerClick = (e: MouseEvent) => {
             </div>
 
             <div class="flex justify-center md:justify-start" :class="[status || 'block']">
-                <Button @click="navigateToDetail" text="Selengkapnya" />
+                <Button @click="navigateToDetail" :text="langStore.t('common.read_more')" />
             </div>
         </div>
     </section>

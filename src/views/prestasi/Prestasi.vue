@@ -25,10 +25,10 @@ onMounted(async () => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika Universitas BTH di tingkat nasional maupun internasional."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika STIKes Budi Luhur Cimahi di tingkat nasional maupun internasional."
 };
 
 useHead({
@@ -44,10 +44,10 @@ useHead({
 
 <template>
     <SeoMeta title="Prestasi Kampus & Mahasiswa"
-        description="Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika Universitas BTH di tingkat nasional maupun internasional."
-        keywords="Prestasi BTH, Penghargaan Mahasiswa, Kampus Berprestasi" :meta-tags="[
+        description="Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika STIKes Budi Luhur Cimahi di tingkat nasional maupun internasional."
+        keywords="Prestasi STIKes, Prestasi STIKes Budi Luhur, Penghargaan Mahasiswa, Kampus Berprestasi" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>

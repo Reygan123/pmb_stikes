@@ -8,10 +8,10 @@ const data = JSON.parse(localStorage.getItem('sambutanData') || '{}')
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "PMB Universitas BTH adalah platform revolusioner yang menggabungkan teknologi mutakhir dengan layanan psikologi profesional untuk membantu individu, keluarga, institusi pendidikan, dan perusahaan memahami potensi diri, meningkatkan kualitas hidup, dan membangun sumber daya manusia yang berdaya saing."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/favicon.png",
+    "description": "PMB STIKes Budi Luhur Cimahi - Platform Pendaftaran Mahasiswa Baru STIKes Budi Luhur Cimahi."
 };
 
 useHead({

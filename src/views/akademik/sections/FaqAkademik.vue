@@ -1,167 +1,168 @@
 <script setup lang="ts">
 import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
+import { useLanguageStore } from '@/stores/language';
 
-const faqData = [
+const langStore = useLanguageStore();
+
+const faqData = computed(() => [
     {
-        category: "FAQ Pendaftaran & Akademik Universitas BTH",
+        idCategory: 'academic',
+        category: langStore.currentLang === 'en' ? 'Admission & Academic Programs' : 'Pendaftaran & Akademik',
         items: [
             {
                 id: 1,
-                question: "Program Studi Apa Saja yang Tersedia di Universitas BTH?",
-                answer: "Universitas BTH memiliki tiga fakultas utama: Fakultas Ilmu Kesehatan, Fakultas Farmasi, serta Fakultas Teknologi dan Bisnis, dengan beragam program studi unggulan yang relevan dengan kebutuhan masa kini."
+                question: langStore.currentLang === 'en'
+                    ? 'What study programs are available at STIKes Budi Luhur Cimahi?'
+                    : 'Program Studi Apa Saja yang Tersedia di STIKes Budi Luhur Cimahi?',
+                answer: langStore.currentLang === 'en'
+                    ? 'STIKes Budi Luhur Cimahi offers leading health science programs: Bachelor of Nursing (S1), Nurse Professional Program, Diploma in Nursing (D3), Bachelor of Midwifery (S1), Diploma in Midwifery (D3), and Midwife Professional Program.'
+                    : 'STIKes Budi Luhur Cimahi menyediakan program studi unggulan bidang kesehatan: S1 Keperawatan, Profesi Ners, D3 Keperawatan, S1 Kebidanan, D3 Kebidanan, dan Profesi Bidan.'
             },
             {
                 id: 2,
-                question: "Apakah Program Studi di Universitas BTH Sudah Terakreditasi?",
-                answer: "Seluruh program studi Universitas BTH telah terakreditasi oleh BAN-PT sebagai jaminan mutu pendidikan."
+                question: langStore.currentLang === 'en'
+                    ? 'Are the study programs at STIKes Budi Luhur Cimahi accredited?'
+                    : 'Apakah Program Studi di STIKes Budi Luhur Cimahi Sudah Terakreditasi?',
+                answer: langStore.currentLang === 'en'
+                    ? 'All academic programs at STIKes Budi Luhur Cimahi are accredited by BAN-PT and LAM-PTKes, guaranteeing high educational quality and standards.'
+                    : 'Seluruh program studi di STIKes Budi Luhur Cimahi telah terakreditasi oleh BAN-PT dan LAM-PTKes sebagai jaminan mutu pendidikan kesehatan yang unggul.'
             },
             {
                 id: 3,
-                question: "Seperti Apa Model Pembelajaran di Universitas BTH?",
-                answer: "Pembelajaran dirancang berbasis project, mengombinasikan teori di kelas, praktik laboratorium, serta pengalaman kerja lapangan secara langsung."
-            },
+                question: langStore.currentLang === 'en'
+                    ? 'What is the learning model at STIKes Budi Luhur Cimahi?'
+                    : 'Seperti Apa Model Pembelajaran di STIKes Budi Luhur Cimahi?',
+                answer: langStore.currentLang === 'en'
+                    ? 'Learning is competency-based, combining classroom theory, modern laboratory simulations, and direct clinical practice in partner hospitals.'
+                    : 'Pembelajaran dirancang berbasis kompetensi kesehatan, mengombinasikan teori di kelas, praktik laboratorium modern, serta praktik klinik langsung di berbagai rumah sakit rekanan.'
+            }
+        ]
+    },
+    {
+        idCategory: 'tuition',
+        category: langStore.currentLang === 'en' ? 'Tuition & Scholarships' : 'Biaya Kuliah & Beasiswa',
+        items: [
             {
                 id: 4,
-                question: "Apa Keunggulan Kurikulum Universitas BTH?",
-                answer: "Kurikulum disusun selaras dengan kebutuhan industri terkini, menekankan penguasaan keterampilan praktis sekaligus pengembangan soft skills."
+                question: langStore.currentLang === 'en'
+                    ? 'How much is the tuition fee at STIKes Budi Luhur Cimahi?'
+                    : 'Berapa Biaya Kuliah di STIKes Budi Luhur Cimahi?',
+                answer: langStore.currentLang === 'en'
+                    ? 'Tuition fees are structured according to the chosen study program, with affordable installment plans to support your educational journey.'
+                    : 'Biaya kuliah disesuaikan dengan program studi pilihan, dengan kemudahan skema cicilan yang terjangkau untuk menunjang masa depan calon tenaga kesehatan.'
+            },
+            {
+                id: 5,
+                question: langStore.currentLang === 'en'
+                    ? 'Are there scholarship opportunities available?'
+                    : 'Apakah STIKes Budi Luhur Cimahi Menyediakan Program Beasiswa?',
+                answer: langStore.currentLang === 'en'
+                    ? 'Multiple scholarship opportunities are available, including academic achievement awards, talent scholarships, KIP Kuliah, and foundation partnerships.'
+                    : 'Tersedia beragam program beasiswa, mulai dari beasiswa prestasi akademik, beasiswa minat bakat, KIP Kuliah, hingga beasiswa dari yayasan dan mitra institusi.'
             }
         ]
     },
     {
-        category: "Biaya Kuliah & Beasiswa",
+        idCategory: 'general',
+        category: langStore.currentLang === 'en' ? 'Campus Location & Facilities' : 'Informasi Umum & Lokasi',
         items: [
             {
-                id: 1,
-                question: "Berapa Biaya Kuliah di Universitas BTH?",
-                answer: "Biaya kuliah per semester disesuaikan dengan program studi, mulai dari Rp4.500.000 hingga Rp8.000.000."
+                id: 6,
+                question: langStore.currentLang === 'en'
+                    ? 'Where is STIKes Budi Luhur Cimahi located?'
+                    : 'Di Mana Lokasi Kampus STIKes Budi Luhur Cimahi?',
+                answer: langStore.currentLang === 'en'
+                    ? 'The campus is located at Jl. Kerkof No. 243 Leuwigajah, South Cimahi, Cimahi City, West Java 40532.'
+                    : 'STIKes Budi Luhur Cimahi berlokasi di Jl. Kerkof No. 243 Leuwigajah, Kec. Cimahi Selatan, Kota Cimahi, Jawa Barat 40532.'
             },
             {
-                id: 2,
-                question: "Apakah Universitas BTH Menyediakan Program Beasiswa?",
-                answer: "Tersedia beragam program beasiswa, mulai dari beasiswa prestasi akademik, jalur olahraga, hingga beasiswa dari mitra industri sebagai dukungan bagi mahasiswa berprestasi."
-            }
-        ]
-    },
-    {
-        category: "Informasi Umum",
-        items: [
-            {
-                id: 1,
-                question: "Di Mana Lokasi Kampus Universitas BTH?",
-                answer: "Universitas BTH berlokasi di Jl. Letjen Mashudi No.20, Setiaratu, Kec. Cibeureum, Kab. Tasikmalaya, Jawa Barat 46196"
-            },
-            {
-                id: 2,
-                question: "Apakah Universitas BTH Menyediakan Asrama Mahasiswa?",
-                answer: "Tersedia asrama mahasiswa berkapasitas hingga 500 orang, dilengkapi fasilitas internet, kantin, serta ruang belajar bersama untuk mendukung kenyamanan dan aktivitas akademik."
-            }
-        ]
-    },
-    {
-        category: "Pendaftaran Mahasiswa Baru",
-        items: [
-            {
-                id: 1,
-                question: "Kapan Jadwal Pendaftaran Mahasiswa Baru Dibuka?",
-                answer: "Pendaftaran mahasiswa baru Universitas BTH dibuka dalam tiga gelombang setiap tahun, yaitu Januari, April, dan Juli."
-            },
-            {
-                id: 2,
-                question: "Bagaimana Cara Mendaftar di Universitas BTH?",
-                answer: "Pendaftaran dapat dilakukan secara online melalui website resmi atau langsung datang ke kampus untuk pendampingan langsung dari Tim PMB."
+                id: 7,
+                question: langStore.currentLang === 'en'
+                    ? 'What support facilities are provided on campus?'
+                    : 'Apakah STIKes Budi Luhur Cimahi Menyediakan Fasilitas Pendukung?',
+                answer: langStore.currentLang === 'en'
+                    ? 'The campus is equipped with integrated nursing and midwifery laboratories, modern library, worship facilities, high-speed internet, and green study environments.'
+                    : 'Kampus dilengkapi laboratorium keperawatan dan kebidanan terpadu, perpustakaan, sarana ibadah, koneksi internet, serta lingkungan belajar yang asri dan kondusif.'
             }
         ]
     }
-];
+]);
 
-const activeCategory = ref(faqData[0].category);
-const activeItems = ref(faqData[0].items);
-const activeItemId = ref(faqData[0].items[0].id);
+const activeCategoryIndex = ref(0);
+const activeItemId = ref(1);
 
-const setActiveCategory = (category: string) => {
-  activeCategory.value = category;
-  const selectedCategory = faqData.find(item => item.category === category);
-  if (selectedCategory) {
-    activeItems.value = selectedCategory.items;
-    activeItemId.value = selectedCategory.items[0].id;
-  }
+const activeCategory = computed(() => faqData.value[activeCategoryIndex.value] || faqData.value[0]);
+const activeItems = computed(() => activeCategory.value.items);
+
+watch(activeCategoryIndex, () => {
+    if (activeItems.value.length > 0) {
+        activeItemId.value = activeItems.value[0].id;
+    }
+});
+
+const setActiveCategoryIndex = (index: number) => {
+    activeCategoryIndex.value = index;
 };
 
 const setActiveItem = (itemId: number) => {
-  activeItemId.value = itemId;
+    activeItemId.value = itemId;
 };
 </script>
 
 <template>
     <section class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
-        <div class="w-full md:w-[40%] flex flex-col justify-center items-start gap-4 border-r border-netral/30">
-            <Tag title="Faq" />
-            <Title title="Pertanyaan yang Sering Diajukan" />
-            <div class="w-full md:w-[80%] space-y-3">
+        <div class="w-full md:w-[40%] flex flex-col justify-center items-start gap-4 md:border-r border-gray-200 pr-0 md:pr-8">
+            <Tag :title="langStore.t('faq.tag')" />
+            <Title :title="langStore.t('faq.title')" />
+            <div class="w-full space-y-3 mt-2">
                 <div 
-                    v-for="item in faqData" 
-                    :key="item.category"
-                    @click="setActiveCategory(item.category)"
-                    class="py-3 px-4 rounded-2xl border border-netral/30 group transition-all duration-500 flex gap-2 items-center cursor-pointer"
-                    :class="{
-                        'bg-primary text-white': activeCategory === item.category,
-                        'hover:bg-primary hover:text-white': activeCategory !== item.category
-                    }"
+                    v-for="(item, index) in faqData" 
+                    :key="item.idCategory"
+                    @click="setActiveCategoryIndex(index)"
+                    class="py-3 px-4 rounded-2xl border transition-all duration-300 flex items-center justify-between cursor-pointer font-medium text-sm md:text-base"
+                    :class="[
+                        activeCategoryIndex === index
+                            ? 'bg-primary text-white border-primary shadow-xs'
+                            : 'border-gray-200 text-gray-700 hover:bg-gray-100/70'
+                    ]"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path
-                            d="M6.75 16.5H11.25C15 16.5 16.5 15 16.5 11.25V6.75C16.5 3 15 1.5 11.25 1.5H6.75C3 1.5 1.5 3 1.5 6.75V11.25C1.5 15 3 16.5 6.75 16.5Z"
-                            :stroke="activeCategory === item.category ? 'white' : 'currentColor'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M7.20055 6.72754L5.33305 8.59504C5.11555 8.81254 5.11555 9.18004 5.33305 9.39754L7.20055 11.265"
-                            :stroke="activeCategory === item.category ? 'white' : 'currentColor'" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path
-                            d="M10.8008 6.72754L12.668 8.59504C12.8858 8.81254 12.8858 9.18004 12.6683 9.39754L10.8008 11.265"
-                            :stroke="activeCategory === item.category ? 'white' : 'currentColor'" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <span>{{ item.category }}</span>
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <h4 class="text-base lg:text-base">{{ item.category }}</h4>
                 </div>
             </div>
         </div>
 
-        <div class="w-full md:w-[60%] flex flex-col justify-center items-center gap-4">
+        <div class="w-full md:w-[60%] flex flex-col justify-center space-y-4">
             <div 
-                v-for="(item, index) in activeItems" 
+                v-for="item in activeItems" 
                 :key="item.id"
                 @click="setActiveItem(item.id)"
-                class="w-full py-6 md:px-10 flex items-start gap-6 transition-all duration-300 cursor-pointer overflow-hidden"
-                :class="{
-                    'bg-[#F8F8F8] rounded-3xl': activeItemId === item.id,
-                    'border-b border-netral/30': index !== activeItems.length - 1
-                }"
+                class="p-4 md:p-5 rounded-2xl border transition-all duration-300 cursor-pointer"
+                :class="[
+                    activeItemId === item.id 
+                        ? 'border-primary/40 bg-blue-50/20 shadow-xs' 
+                        : 'border-gray-200 hover:border-gray-300'
+                ]"
             >
-                <div class="w-7 h-7 py-1 px-2 text-white bg-primary flex justify-center items-center rounded-full shrink-0">
-                    <p class="text-base">{{ index + 1 }}</p>
-                </div>
-                <div class="w-fit space-y-3">
-                    <h5 class="text-base md:text-base lg:text-lg font-medium">{{ item.question }}</h5>
-                    
-                    <div 
-                        class="answer-container transition-all duration-500 ease-in-out overflow-hidden"
-                        :class="{
-                            'max-h-40 opacity-100': activeItemId === item.id,
-                            'max-h-0 opacity-0': activeItemId !== item.id
-                        }"
+                <div class="flex justify-between items-center gap-4">
+                    <h4 class="font-bold text-gray-900 text-base md:text-lg">{{ item.question }}</h4>
+                    <span 
+                        class="w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300"
+                        :class="activeItemId === item.id ? 'bg-primary text-white rotate-180' : 'bg-gray-100 text-gray-500'"
                     >
-                        <p class="text-xs lg:text-sm text-black/60 md:text-black/40 transition-all duration-300">{{ item.answer }}</p>
-                    </div>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </span>
+                </div>
+                <div v-show="activeItemId === item.id" class="mt-3 pt-3 border-t border-gray-100 text-sm md:text-base text-gray-600 leading-relaxed">
+                    {{ item.answer }}
                 </div>
             </div>
         </div>
     </section>
 </template>
-
-<style scoped>
-.answer-container {
-  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-}
-</style>

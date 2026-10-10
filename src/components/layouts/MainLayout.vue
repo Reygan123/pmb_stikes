@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import CtaSection from '../sections/CtaSection.vue';
-import FloatingButton from '../ui/FloatingButton.vue';
-import Footer from '../ui/Footer.vue';
-import GoogleTranslate from '../ui/GoogleTranslate.vue';
+import { defineAsyncComponent, onMounted, ref } from 'vue';
 import Navbar from '../ui/Navbar.vue';
-import { onMounted, ref } from 'vue';
+
+const CtaSection = defineAsyncComponent(() => import('../sections/CtaSection.vue'));
+const FloatingButton = defineAsyncComponent(() => import('../ui/FloatingButton.vue'));
+const Footer = defineAsyncComponent(() => import('../ui/Footer.vue'));
 
 defineProps({
   position: String
@@ -19,26 +19,23 @@ onMounted(() => {
 
 <template>
     <Navbar :position="position"/>
-    <div :class="{'fade-in-up': isMounted}">
+    <main :class="{'fade-in-up': isMounted}">
         <slot></slot>
-    </div>
+    </main>
     <CtaSection />
-    <GoogleTranslate />
     <FloatingButton />
     <Footer />
 </template>
 
 <style scoped>
 .fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-  transform: translateY(30px);
+  animation: fadeInUp 0.3s ease-out;
 }
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0.9;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;

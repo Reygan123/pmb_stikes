@@ -1,22 +1,23 @@
 import ApiService from "@/core/services/ApiService";
 import { createRouter, type RouteRecordRaw } from "vue-router";
 import { createWebHistory } from "vue-router";
+import Beranda from "@/views/beranda/Beranda.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'Pendaftaran Mahasiswa Baru (PMB) & Admisi',
-        component: () => import('@/views/beranda/Beranda.vue'),
+        component: Beranda,
         meta: {
             pageTitle: 'Pendaftaran Mahasiswa Baru (PMB) & Admisi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Universitas BTH berkomitmen mencetak lulusan yang menguasai integrasi ilmu pengetahuan dan kecerdasan buatan untuk menjawab tantangan industri di tingkat global.'
+                    content: 'STIKes Budi Luhur Cimahi berkomitmen mencetak lulusan tenaga kesehatan yang profesional, kompeten, berakhlak mulia, dan siap bersaing di tingkat nasional maupun global.'
                 },
                 {
                     name: 'keywords',
-                    content: 'PMB BTH, Universitas BTH, Pendaftaran Mahasiswa Baru, Kuliah BTH, Fakultas BTH'
+                    content: 'PMB STIKes Budi Luhur, STIKes Budi Luhur Cimahi, Pendaftaran Mahasiswa Baru, Kuliah Kesehatan Cimahi, Program Studi STIKes'
                 },
                 {
                     property: 'og:type',
@@ -34,15 +35,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Fakultas',
         component: () => import('@/views/fakultas/Fakultas.vue'),
         meta: {
-            pageTitle: 'Daftar Fakultas',
+            pageTitle: 'Daftar Program Studi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Jelajahi berbagai Fakultas unggulan di Universitas BTH. Temukan bidang ilmu yang sesuai dengan minat dan karir masa depan Anda.'
+                    content: 'Jelajahi berbagai Program Studi unggulan di STIKes Budi Luhur Cimahi. Temukan bidang ilmu kesehatan yang sesuai dengan minat dan karir masa depan Anda.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Fakultas BTH, Program Studi BTH, Jurusan Kuliah, Pilihan Fakultas'
+                    content: 'Program Studi STIKes Budi Luhur, Jurusan Kuliah Kesehatan, Pilihan Prodi, STIKes Cimahi'
                 },
                 {
                     property: 'og:type',
@@ -60,15 +61,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Fakultas Detail',
         component: () => import('@/views/fakultasDetail/FakultasDetail.vue'),
         meta: {
-            pageTitle: 'Detail Fakultas',
+            pageTitle: 'Detail Program Studi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Informasi mendalam tentang Fakultas, Program Studi, dosen, dan prospek karir di Universitas BTH.'
+                    content: 'Informasi mendalam tentang program studi, dosen, dan prospek karir di STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Fakultas BTH, Info Program Studi, Prospek Karir'
+                    content: 'STIKes Budi Luhur Cimahi, Info Program Studi, Prospek Karir Kesehatan'
                 },
                 {
                     property: 'og:type',
@@ -90,11 +91,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Lihat kurikulum, keunggulan, dan peluang kerja dari Program Studi pilihan di Universitas BTH.'
+                    content: 'Lihat kurikulum, keunggulan, dan peluang kerja dari Program Studi pilihan di STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Program Studi BTH, Kurikulum Kuliah, Prospek Kerja Lulusan'
+                    content: 'Program Studi STIKes Budi Luhur, Kurikulum Kuliah, Prospek Kerja Tenaga Kesehatan'
                 },
                 {
                     property: 'og:type',
@@ -116,11 +117,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Temukan semua jalur pendaftaran PMB Universitas BTH, termasuk informasi jadwal, syarat, dan tanggal penting pendaftaran.'
+                    content: 'Temukan semua jalur pendaftaran PMB STIKes Budi Luhur Cimahi, termasuk informasi jadwal, syarat, dan tanggal penting pendaftaran.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Jalur Pendaftaran BTH, Jadwal PMB, Syarat Pendaftaran Kuliah, Tanggal Penting BTH'
+                    content: 'Jalur Pendaftaran STIKes Budi Luhur, Jadwal PMB, Syarat Pendaftaran Kuliah, Tanggal Penting PMB'
                 },
                 {
                     property: 'og:type',
@@ -142,11 +143,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Informasi rinci mengenai salah satu jalur pendaftaran PMB Universitas BTH, termasuk persyaratan khusus dan prosedur pendaftaran.'
+                    content: 'Informasi rinci mengenai salah satu jalur pendaftaran PMB STIKes Budi Luhur Cimahi, termasuk persyaratan khusus dan prosedur pendaftaran.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Syarat Pendaftaran BTH, Prosedur PMB, Pendaftaran Kuliah'
+                    content: 'Syarat Pendaftaran STIKes, Prosedur PMB, Pendaftaran Kuliah STIKes Budi Luhur'
                 },
                 {
                     property: 'og:type',
@@ -168,11 +169,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Ikuti perkembangan terbaru Universitas BTH. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB.'
+                    content: 'Ikuti perkembangan terbaru STIKes Budi Luhur Cimahi. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Berita BTH, Pengumuman PMB, Info Kampus Terbaru'
+                    content: 'Berita STIKes Budi Luhur, Pengumuman PMB, Info Kampus Cimahi Terbaru'
                 },
                 {
                     property: 'og:type',
@@ -194,11 +195,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Baca artikel lengkap dan informasi mendalam mengenai kegiatan, prestasi, atau pengumuman penting dari Universitas BTH.'
+                    content: 'Baca artikel lengkap dan informasi mendalam mengenai kegiatan, prestasi, atau pengumuman penting dari STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Berita Kampus, Artikel BTH, Informasi Detail Universitas'
+                    content: 'Berita Kampus Kesehatan, Artikel STIKes Budi Luhur, Informasi Detail Institusi'
                 },
                 {
                     property: 'og:type',
@@ -220,11 +221,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Informasi lengkap tentang acara atau agenda penting yang akan datang di Universitas BTH, termasuk tanggal, waktu, dan lokasi.'
+                    content: 'Informasi lengkap tentang acara atau agenda penting yang akan datang di STIKes Budi Luhur Cimahi, termasuk tanggal, waktu, dan lokasi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Jadwal Acara BTH, Event Kampus, Kegiatan Mahasiswa'
+                    content: 'Jadwal Acara STIKes Budi Luhur, Event Kampus, Kegiatan Mahasiswa Kesehatan'
                 },
                 {
                     property: 'og:type',
@@ -246,11 +247,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh Universitas BTH.'
+                    content: 'Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Agenda BTH, Kalender Akademik, Acara Kampus'
+                    content: 'Agenda STIKes Budi Luhur, Kalender Akademik, Acara Kampus'
                 },
                 {
                     property: 'og:type',
@@ -272,11 +273,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di Universitas BTH.'
+                    content: 'Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Fasilitas BTH, Laboratorium Kampus, Perpustakaan BTH, Sarana Prasarana'
+                    content: 'Fasilitas STIKes Budi Luhur, Laboratorium Keperawatan Kebidanan, Perpustakaan, Sarana Prasarana'
                 },
                 {
                     property: 'og:type',
@@ -298,11 +299,11 @@ const routes: Array<RouteRecordRaw> = [
     //         metaTags: [
     //             {
     //                 name: 'description',
-    //                 content: 'Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa Universitas BTH.'
+    //                 content: 'Dengarkan kisah sukses dan pengalaman berharga dari alumni dan mahasiswa STIKes Budi Luhur Cimahi.'
     //             },
     //             {
     //                 name: 'keywords',
-    //                 content: 'Testimoni BTH, Kisah Alumni, Pengalaman Mahasiswa BTH'
+    //                 content: 'Testimoni STIKes Budi Luhur, Kisah Alumni, Pengalaman Mahasiswa'
     //             },
     //             {
     //                 property: 'og:type',
@@ -320,15 +321,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Tentang',
         component: () => import('@/views/tentang/Tentang.vue'),
         meta: {
-            pageTitle: 'Tentang Universitas BTH',
+            pageTitle: 'Tentang STIKes Budi Luhur Cimahi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Bangun Masa Depan Gemilang Di Universitas Bakti Tunas Husada Mencetak Profesional yang Inovatif Berkarakter di Bidang Kesehatan, Teknologi, dan Bisnis.'
+                    content: 'Bangun Masa Depan Gemilang di STIKes Budi Luhur Cimahi, Mencetak Tenaga Kesehatan Profesional, Inovatif, dan Berkarakter.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Visi Misi BTH, Sejarah Kampus, Profil Universitas BTH'
+                    content: 'Visi Misi STIKes Budi Luhur, Sejarah Kampus, Profil STIKes Budi Luhur Cimahi'
                 },
                 {
                     property: 'og:type',
@@ -350,11 +351,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa BTH.'
+                    content: 'Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa STIKes Budi Luhur Cimahi.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Kegiatan Kampus, UKM BTH, Organisasi Mahasiswa, Ekstrakurikuler'
+                    content: 'Kegiatan Kampus, UKM STIKes Budi Luhur, Organisasi Mahasiswa, Ekstrakurikuler'
                 },
                 {
                     property: 'og:type',
@@ -376,11 +377,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika Universitas BTH di tingkat nasional maupun internasional.'
+                    content: 'Saksikan berbagai penghargaan dan prestasi yang telah diraih oleh mahasiswa dan civitas akademika STIKes Budi Luhur Cimahi di tingkat nasional maupun internasional.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Prestasi BTH, Penghargaan Mahasiswa, Kampus Berprestasi'
+                    content: 'Prestasi STIKes Budi Luhur, Penghargaan Mahasiswa, Kampus Kesehatan Berprestasi'
                 },
                 {
                     property: 'og:type',
@@ -402,11 +403,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Universitas BTH mengembangkan pendidikan berbasis Ekosistem Kolaborasi, di mana Fakultas Ilmu Kesehatan, Farmasi, serta Teknologi dan Bisnis bersinergi dalam satu lingkungan akademik. Pendekatan ini membiasakan mahasiswa bekerja dalam tim multidisiplin untuk menyelesaikan tantangan nyata, sejalan dengan komitmen kami terhadap pendidikan inovatif berstandar global.'
+                    content: 'STIKes Budi Luhur Cimahi menyelenggarakan pendidikan tinggi kesehatan yang komprehensif, berbasis kompetensi dan nilai-nilai luhur kemanusiaan dengan kurikulum terkini dan fasilitas laboratorium terpadu.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Kurikulum BTH, Sistem Kuliah, Kalender Akademik BTH'
+                    content: 'Kurikulum STIKes Budi Luhur, Sistem Kuliah, Kalender Akademik STIKes'
                 },
                 {
                     property: 'og:type',
@@ -424,15 +425,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'SambutanDetail',
         component: () => import('@/views/sambutanDetail/SambutanDetail.vue'),
         meta: {
-            pageTitle: 'Sambutan Rektor/Pimpinan',
+            pageTitle: 'Sambutan Ketua STIKes',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Pesan dan sambutan dari Rektor/Pimpinan Universitas BTH mengenai visi pendidikan dan harapan bagi calon mahasiswa baru.'
+                    content: 'Pesan dan sambutan dari Ketua/Pimpinan STIKes Budi Luhur Cimahi mengenai visi pendidikan kesehatan dan harapan bagi calon mahasiswa baru.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Sambutan Rektor BTH, Pesan Pimpinan Kampus, Visi Pendidikan BTH'
+                    content: 'Sambutan Ketua STIKes Budi Luhur, Pesan Pimpinan Kampus, Visi Pendidikan STIKes'
                 },
                 {
                     property: 'og:type',
@@ -454,11 +455,11 @@ const routes: Array<RouteRecordRaw> = [
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Lihat status akreditasi institusi dan program studi di Universitas BTH. Jaminan kualitas pendidikan untuk masa depan Anda.'
+                    content: 'Lihat status akreditasi institusi dan program studi di STIKes Budi Luhur Cimahi. Jaminan kualitas pendidikan untuk masa depan Anda.'
                 },
                 {
                     name: 'keywords',
-                    content: 'Akreditasi BTH, Akreditasi Institusi, Akreditasi Prodi, Kualitas Pendidikan'
+                    content: 'Akreditasi STIKes Budi Luhur, Akreditasi Institusi, Akreditasi LAM-PTKes, Kualitas Pendidikan'
                 },
                 {
                     property: 'og:type',
@@ -476,15 +477,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Panduan',
         component: () => import('@/views/panduan/Panduan.vue'),
         meta: {
-            pageTitle: 'Panduan PMB & Akreditasi Universitas BTH',
+            pageTitle: 'Panduan PMB & Akreditasi STIKes Budi Luhur Cimahi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi Universitas BTH terbaru. Wujudkan pendidikan berkualitas Anda di BTH!.'
+                    content: 'Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi STIKes Budi Luhur Cimahi terbaru. Wujudkan pendidikan berkualitas Anda di STIKes!'
                 },
                 {
                     name: 'keywords',
-                    content: 'panduan pmb bth, akreditasi universitas bth, status prodi bth, syarat pendaftaran bth, kualitas pendidikan'
+                    content: 'panduan pmb stikes, akreditasi stikes budi luhur, status prodi stikes, syarat pendaftaran stikes, kualitas pendidikan'
                 },
                 {
                     property: 'og:type',
@@ -502,15 +503,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Panduan Pembayaran Registrasi Ulang',
         component: () => import('@/views/pembayaran/Pembayaran.vue'),
         meta: {
-            pageTitle: 'Panduan PMB & Akreditasi Universitas BTH',
+            pageTitle: 'Panduan Pembayaran Registrasi Ulang STIKes Budi Luhur Cimahi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Cek panduan penerimaan mahasiswa baru (PMB) dan status akreditasi Institusi & Program Studi Universitas BTH terbaru. Wujudkan pendidikan berkualitas Anda di BTH!.'
+                    content: 'Cek panduan pembayaran registrasi ulang penerimaan mahasiswa baru (PMB) STIKes Budi Luhur Cimahi terbaru.'
                 },
                 {
                     name: 'keywords',
-                    content: 'panduan pmb bth, akreditasi universitas bth, status prodi bth, syarat pendaftaran bth, kualitas pendidikan'
+                    content: 'panduan pembayaran registrasi ulang, pmb stikes budi luhur, biaya registrasi stikes'
                 },
                 {
                     property: 'og:type',
@@ -528,15 +529,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Biaya',
         component: () => import('@/views/biaya/Biaya.vue'),
         meta: {
-            pageTitle: 'Biaya Kuliah Universitas BTH 2024/2025',
+            pageTitle: 'Biaya Kuliah STIKes Budi Luhur Cimahi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Lihat rincian lengkap biaya kuliah per program studi dan institusi di Universitas BTH untuk tahun 2024/2025. Investasi terjangkau untuk masa depan terbaik Anda!.'
+                    content: 'Lihat rincian lengkap biaya kuliah per program studi di STIKes Budi Luhur Cimahi. Investasi terjangkau untuk masa depan terbaik Anda!'
                 },
                 {
                     name: 'keywords',
-                    content: 'biaya kuliah universitas bth, rincian biaya prodi bth, uang semester bth, daftar biaya pmb bth, kuliah terjangkau'
+                    content: 'biaya kuliah stikes budi luhur, rincian biaya prodi stikes, uang semester stikes, daftar biaya pmb stikes, kuliah kesehatan terjangkau'
                 },
                 {
                     property: 'og:type',
@@ -554,15 +555,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Pengumuman',
         component: () => import('@/views/pengumuman/Pengumuman.vue'),
         meta: {
-            pageTitle: 'Biaya Kuliah Universitas BTH 2024/2025',
+            pageTitle: 'Pengumuman Kelulusan & Informasi PMB STIKes Budi Luhur Cimahi',
             metaTags: [
                 {
                     name: 'description',
-                    content: 'Dapatkan pengumuman resmi terbaru dari Universitas BTH. Cek informasi penting mengenai jadwal akademik, pendaftaran, kegiatan mahasiswa, hingga kebijakan kampus terbaru.'
+                    content: 'Dapatkan pengumuman resmi terbaru dari STIKes Budi Luhur Cimahi. Cek informasi penting mengenai jadwal akademik, kelulusan pendaftaran, kegiatan mahasiswa, hingga kebijakan kampus terbaru.'
                 },
                 {
                     name: 'keywords',
-                    content: 'pengumuman BTH, informasi kampus BTH, jadwal akademik BTH, berita BTH, kegiatan mahasiswa BTH'
+                    content: 'pengumuman STIKes, informasi kampus STIKes Budi Luhur, jadwal akademik stikes, berita stikes, kegiatan mahasiswa stikes'
                 },
                 {
                     property: 'og:type',
@@ -602,7 +603,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _, next) => {
-    const appName = import.meta.env.VITE_APP_NAME || 'PMB Universitas BTH';
+    const appName = import.meta.env.VITE_APP_NAME || 'PMB STIKes Budi Luhur Cimahi';
 
     document.title = to.meta.pageTitle
         ? `${to.meta.pageTitle} - ${appName}`

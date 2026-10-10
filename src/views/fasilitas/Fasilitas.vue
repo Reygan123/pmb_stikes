@@ -18,10 +18,10 @@ onMounted(async () => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di Universitas BTH."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di STIKes Budi Luhur Cimahi."
 };
 
 useHead({
@@ -36,17 +36,17 @@ useHead({
 </script>
 
 <template>
-    <SeoMeta title="Fasilitas Universitas BTH"
-        description="Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di Universitas BTH."
-        keywords="Fasilitas BTH, Laboratorium Kampus, Perpustakaan BTH, Sarana Prasarana" :meta-tags="[
+    <SeoMeta title="Fasilitas STIKes Budi Luhur Cimahi"
+        description="Lihat berbagai fasilitas modern dan lengkap yang mendukung proses belajar dan pengembangan diri mahasiswa di STIKes Budi Luhur Cimahi."
+        keywords="Fasilitas STIKes, Fasilitas STIKes Budi Luhur, Laboratorium Keperawatan, Perpustakaan, Sarana Prasarana" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>
         <FasilitasHero :loading="fasilitasStore.loading" :error="fasilitasStore.error"
             :fasilitas="fasilitasStore.fasilitas.slice(0, 5)" />
         <FasilitasContent :loading="fasilitasStore.loading" :error="fasilitasStore.error"
-            :fasilitas="fasilitasStore.fasilitas.slice(5, 100)" />
+            :fasilitas="fasilitasStore.fasilitas.length > 5 ? fasilitasStore.fasilitas.slice(5) : fasilitasStore.fasilitas" />
     </MainLayout>
 </template>

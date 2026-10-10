@@ -57,8 +57,8 @@ onMounted(async () => {
 
 const pageTitle = computed(() => {
   return postStore.currentPost?.title
-    ? `${postStore.currentPost.title} - PMB Universitas BTH`
-    : 'Berita - PMB Universitas BTH'
+    ? `${postStore.currentPost.title} - PMB STIKes Budi Luhur Cimahi`
+    : 'Berita - PMB STIKes Budi Luhur Cimahi'
 })
 
 useHead({
@@ -66,7 +66,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: postStore.currentPost?.title || 'Artikel berita terbaru dari PMB Universitas BTH'
+      content: postStore.currentPost?.title || 'Artikel berita terbaru dari PMB STIKes Budi Luhur Cimahi'
     }
   ],
   script: [
@@ -80,9 +80,9 @@ useHead({
 
 <template>
   <SeoMeta :title="postStore.currentPost?.title" :description="postStore.currentPost?.description"
-    keywords="Syarat Pendaftaran BTH, Prosedur PMB, Pendaftaran Kuliah" :meta-tags="[
+    keywords="Berita STIKes Budi Luhur, Informasi PMB, Kampus Cimahi" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
   <MainLayout>

@@ -5,7 +5,10 @@ import ArticleCardSkeleton from '@/components/sections/skeletons/ArticleCardSkel
 import ArticleCard from '@/components/ui/ArticleCard.vue';
 import Title from '@/components/ui/Title.vue';
 import { usePostStore } from '@/stores/post';
+import { useLanguageStore } from '@/stores/language';
 import { computed, ref } from 'vue';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     berita: ReturnType<typeof usePostStore>
@@ -165,17 +168,17 @@ const goToLastPage = async () => {
     <section v-if="(!loading || paginationLoading) && !error && filteredPosts?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
         <div class="w-full flex flex-col justify-center items-center gap-8">
-            <Title title="Berita Terbaru" />
+            <Title :title="langStore.currentLang === 'en' ? 'Latest News' : 'Berita Terbaru'" />
             <div class="w-full inline-flex justify-center items-center gap-4 overflow-scroll">
                 <div @click="filterByCategory(null)"
                     class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group font-medium hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer"
                     :class="selectedCategory === null ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'">
-                    <p class="text-sm md:text-base lg:text-lg">All</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.currentLang === 'en' ? 'All' : 'Semua' }}</p>
                 </div>
                 <div v-for="category in categories" :key="category.id" @click="filterByCategory(category.slug)"
                     class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group font-medium hover:bg-primary hover:text-white transition-all duration-500 cursor-pointer"
                     :class="selectedCategory === category.slug ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'">
-                    <p class="text-sm md:text-base lg:text-lg">{{ category.name }}</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.loc(category.name) }}</p>
                 </div>
             </div>
         </div>
@@ -188,8 +191,8 @@ const goToLastPage = async () => {
 
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="(item, index) in filteredPosts" :key="index">
-                <ArticleCard :image="item.image" :link="'item.link'" :category="item.category.name" :date="item.pub_date"
-                    :title="item.title" :slug="item.slug" />
+                <ArticleCard :image="item.image" :link="'item.link'" :category="langStore.loc(item.category.name)" :date="item.pub_date"
+                    :title="langStore.loc(item.title, item.title_en)" :slug="item.slug" />
             </div>
         </div>
 
@@ -254,9 +257,9 @@ const goToLastPage = async () => {
         </div>
 
         <div class="flex justify-center items-center space-x-2 text-sm text-gray-500 mt-4">
-            <span>Showing {{ filteredPosts.length }} of {{ filteredPostsByDate.length }} posts</span>
+            <span>{{ langStore.currentLang === 'en' ? `Showing ${filteredPosts.length} of ${filteredPostsByDate.length} posts` : `Menampilkan ${filteredPosts.length} dari ${filteredPostsByDate.length} artikel` }}</span>
             <span>•</span>
-            <span>Page {{ berita.pagination.currentPage }} of {{ berita.pagination.lastPage }}</span>
+            <span>{{ langStore.currentLang === 'en' ? `Page ${berita.pagination.currentPage} of ${berita.pagination.lastPage}` : `Halaman ${berita.pagination.currentPage} dari ${berita.pagination.lastPage}` }}</span>
         </div>
     </section>
 </template>

@@ -5,6 +5,9 @@ import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import type { Jalur } from '@/core/types/jalur';
 import { getImageUrl } from '@/utils/imageUtils';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     jalur: Jalur | null,
@@ -34,20 +37,20 @@ const parseListItems = (htmlContent: string) => {
 
     <section v-if="!loading && !error && jalur !== null"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col md:flex-row md:jusitfy-center items-center gap-8 md:gap-12 lg:gap-16">
-        <div class="w-full md:w-[40%] h-[30vh] md:h-[40vh] lg:h-[50vh] rounded-4xl overflow-hidden">
+        <div class="w-full md:w-[40%] h-[30vh] md:h-[40vh] lg:h-[50vh] rounded-4xl overflow-hidden shadow-sm">
             <img :src="getImageUrl(`registration/${jalur.image3}`)" :alt="jalur.title3" loading="lazy" class="w-full h-full object-cover">
         </div>
         <div class="w-full md:w-[60%] h-full flex flex-col justify-center items-start gap-6">
             <div class="space-y-3">
-                <Tag title="Persyaratan Pendaftaran" />
-                <Title :title="jalur?.title3" />
+                <Tag :title="langStore.currentLang === 'en' ? 'Admission Requirements' : 'Persyaratan Pendaftaran'" />
+                <Title :title="langStore.loc(jalur?.title3, jalur?.title3_en)" />
             </div>
             <div class="space-y-2 md:space-y-3">
-                <div v-for="item in parseListItems(jalur.description3)" :key="item" class="flex items-start gap-3">
+                <div v-for="item in parseListItems(langStore.loc(jalur.description3, jalur.description3_en))" :key="item" class="flex items-start gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none" class="flex-shrink-0 mt-0.5">
                         <path
                             d="M15 10.5L11 14.5L9 12.5M12 21.5C7.02944 21.5 3 17.4706 3 12.5C3 7.52944 7.02944 3.5 12 3.5C16.9706 3.5 21 7.52944 21 12.5C21 17.4706 16.9706 21.5 12 21.5Z"
-                            stroke="#F03C06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="#005EB8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <p class="text-sm md:text-base lg:text-lg font-medium">{{ item }}</p>
                 </div>

@@ -1,8 +1,10 @@
 export interface Prestasi {
   id: number;
   title: string;
+  title_en?: string;
   slug: string;
   name: string;
+  name_en?: string;
   categoriprestasi_id: number;
   program_id: number;
   home: number | null;

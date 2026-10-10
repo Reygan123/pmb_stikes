@@ -5,6 +5,9 @@ export interface Fasilitas {
   slug: string;
   subtitle: string;
   description: string;
+  title_en?: string;
+  subtitle_en?: string;
+  description_en?: string;
   image: string;
   image1: string;
   image2: string;

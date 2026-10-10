@@ -6,7 +6,9 @@ import Title from '../ui/Title.vue';
 import MengapaSkeleton from './skeletons/MengapaSkeleton.vue';
 import ErrorSection from './ErrorSection.vue';
 import EmptySection from './EmptySection.vue';
-// import Doc from '@/assets/icon/doc.png'
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     usp: Unggulan[],
@@ -31,15 +33,15 @@ defineProps<{
     <section v-if="!loading && !error && usp?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
         <div class="w-full flex flex-col md:justify-center md:items-center md:text-center gap-4">
-            <Tag title="Keunggulan Universitas BTH" />
-            <Title title="Mengapa Memilih Universitas BTH?" />
-            <Subtitle text="Universitas Bakti Tunas Husada (BTH) merupakan perguruan tinggi yang berkomitmen mencetak lulusan unggul, berkarakter, dan siap bersaing di dunia profesional." />
+            <Tag :title="langStore.t('mengapa.tag')" />
+            <Title :title="langStore.t('mengapa.title')" />
+            <Subtitle :text="langStore.t('mengapa.subtitle')" />
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:px-16 xl:px-28">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:px-16 xl:px-28 gap-4">
             <div v-for="(item, index) in usp" :key="index"
-                class="p-6 flex flex-col justify-center items-center text-center gap-4 rounded-3xl [&:nth-child(1)]:bg-primary/10 [&:nth-child(3)]:bg-primary/10 [&:nth-child(5)]:bg-primary/10 [&:nth-child(7)]:bg-primary/10 [&:nth-child(9)]:bg-primary/10">
-                <div class="w-12 h-12 p-4 rounded-full bg-[#F8F8F8] flex justify-center items-center">
+                class="p-6 flex flex-col justify-center items-center text-center gap-4 rounded-3xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md group [&:nth-child(1)]:bg-primary/10 [&:nth-child(3)]:bg-primary/10 [&:nth-child(5)]:bg-primary/10 [&:nth-child(7)]:bg-primary/10 [&:nth-child(9)]:bg-primary/10">
+                <div class="w-12 h-12 p-4 rounded-full bg-[#F8F8F8] flex justify-center items-center transition-transform duration-300 ease-out group-hover:scale-105">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <g clip-path="url(#clip0_16438_6311)">
                             <mask id="mask0_16438_6311" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0"
@@ -64,8 +66,8 @@ defineProps<{
                 </div>
 
                 <div class="space-y-1">
-                    <h3 class="text-base lg:text-lg text-primary font-medium">{{ item.title }}</h3>
-                    <p class="text-sm" v-html="item.description"></p>
+                    <h3 class="text-base lg:text-lg text-primary font-medium">{{ langStore.loc(item.title, item.title_en) }}</h3>
+                    <p class="text-sm" v-html="langStore.loc(item.description, item.description_en)"></p>
                 </div>
             </div>
         </div>

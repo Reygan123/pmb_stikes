@@ -7,6 +7,9 @@ import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import type { Akademik } from '@/core/types/akademik';
 import { computed, ref } from 'vue'
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     akademik: Akademik[]
@@ -16,10 +19,17 @@ const props = defineProps<{
 
 const currentDate = ref(new Date(2025, 8, 1))
 
-const monthNames = [
+const monthNamesId = [
     'JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI',
     'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'
 ]
+
+const monthNamesEn = [
+    'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+    'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
+]
+
+const monthNames = computed(() => langStore.currentLang === 'en' ? monthNamesEn : monthNamesId)
 
 const events = computed(() => {
     if (!props.akademik || props.akademik.length === 0) return []
@@ -29,11 +39,11 @@ const events = computed(() => {
         title: item.title,
         startDate: new Date(item.startDate),
         endDate: new Date(item.endDate),
-        color: 'bg-orange-500'
+        color: item.color || 'bg-primary'
     }))
 })
 
-const currentMonth = computed(() => monthNames[currentDate.value.getMonth()])
+const currentMonth = computed(() => monthNames.value[currentDate.value.getMonth()])
 const currentYear = computed(() => currentDate.value.getFullYear())
 
 const daysInMonth = computed(() => {
@@ -128,10 +138,10 @@ const nextMonth = () => {
     <section v-if="!loading && !error && akademik !== null"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-16">
         <div class="w-full flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="Kalendar" />
-            <Title title="Kalendar Akademik 2025/2026" />
+            <Tag :title="langStore.currentLang === 'en' ? 'Calendar' : 'Kalender'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Academic Calendar 2025/2026' : 'Kalender Akademik 2025/2026'" />
             <Subtitle class="text-center"
-                text="Panduan resmi jadwal akademik Universitas BTH, mencakup perkuliahan, ujian, dan hari libur." />
+                :text="langStore.currentLang === 'en' ? 'Official schedule guide for STIKes Budi Luhur Cimahi academic activities, exams, and holidays.' : 'Panduan resmi jadwal akademik STIKes Budi Luhur Cimahi, mencakup perkuliahan, ujian, dan hari libur.'" />
         </div>
 
         <div class="w-full bg-white border rounded-4xl overflow-hidden">

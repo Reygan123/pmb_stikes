@@ -20,15 +20,15 @@ onMounted(async () => {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Blog", 
-  "name": "Berita Terbaru Universitas BTH",
-  "description": "Ikuti perkembangan terbaru Universitas BTH. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB.",
-  "url": "https://admisi.universitas-bth.ac.id/berita",
+  "name": "Berita Terbaru STIKes Budi Luhur Cimahi",
+  "description": "Ikuti perkembangan terbaru STIKes Budi Luhur Cimahi. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB.",
+  "url": "https://stikesbudiluhurcimahi.ac.id/berita",
   "publisher": {
     "@type": "CollegeOrUniversity",
-    "name": "Universitas BTH",
+    "name": "STIKes Budi Luhur Cimahi",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp"
+      "url": "https://stikesbudiluhurcimahi.ac.id/logo.png"
     }
   }
 };
@@ -44,11 +44,11 @@ useHead({
 </script>
 
 <template>
-  <SeoMeta title="Berita Terbaru PMB BTH"
-    description="Ikuti perkembangan terbaru Universitas BTH. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB."
-    keywords="Berita BTH, Pengumuman PMB, Info Kampus Terbaru" :meta-tags="[
+  <SeoMeta title="Berita Terbaru STIKes Budi Luhur Cimahi"
+    description="Ikuti perkembangan terbaru STIKes Budi Luhur Cimahi. Dapatkan berita, pengumuman, dan informasi penting seputar kampus dan PMB."
+    keywords="Berita STIKes Budi Luhur, Pengumuman PMB, Info Kampus Cimahi Terbaru" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
   <MainLayout>

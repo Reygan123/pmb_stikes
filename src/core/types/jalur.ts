@@ -1,19 +1,28 @@
 export interface Jalur {
   id: number;
   name: string;
+  name_en?: string;
   slug: string;
   start_date: string;
   end_date: string;
   start_time: string;
   end_time: string;
   description: string;
+  description_en?: string;
   content: string;
+  content_en?: string;
   title1: string;
+  title1_en?: string;
   title2: string;
+  title2_en?: string;
   title3: string;
+  title3_en?: string;
   description1: string;
+  description1_en?: string;
   description2: string;
+  description2_en?: string;
   description3: string;
+  description3_en?: string;
   image1: string;
   image2: string;
   image3: string;

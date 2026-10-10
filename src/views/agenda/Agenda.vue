@@ -17,10 +17,10 @@ onMounted(() => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh Universitas BTH."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh STIKes Budi Luhur Cimahi."
 };
 
 useHead({
@@ -35,10 +35,10 @@ useHead({
 
 <template>
     <SeoMeta title="Daftar Agenda dan Acara"
-        description="Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh Universitas BTH."
-        keywords="Berita BTH, Pengumuman PMB, Info Kampus Terbaru" :meta-tags="[
+        description="Jelajahi kalender akademik, kegiatan, dan acara penting lainnya yang diselenggarakan oleh STIKes Budi Luhur Cimahi."
+        keywords="Agenda STIKes Budi Luhur, Pengumuman PMB, Info Kampus Terbaru" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>

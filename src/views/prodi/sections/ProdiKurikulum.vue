@@ -5,6 +5,9 @@ import ProdiKurikulumSkeleton from '@/components/sections/skeletons/ProdiKurikul
 import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import { getImageUrl } from '@/utils/imageUtils';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 defineProps<{
     image: string,
@@ -44,7 +47,7 @@ const parseListItems = (htmlContent: string) => {
 
         <div class="w-full md:w-[60%] space-y-6 md:space-y-8">
             <div class="space-y-3">
-                <Tag title="Kurikulum" />
+                <Tag :title="langStore.currentLang === 'en' ? 'Curriculum' : 'Kurikulum'" />
                 <div class="space-y-2">
                     <Title :title="title" />
                     <!-- <p class="text-xs md:text-sm lg:text-base font-light [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
@@ -59,7 +62,7 @@ const parseListItems = (htmlContent: string) => {
                         class="flex-shrink-0 mt-0.5">
                         <path
                             d="M15 10.5L11 14.5L9 12.5M12 21.5C7.02944 21.5 3 17.4706 3 12.5C3 7.52944 7.02944 3.5 12 3.5C16.9706 3.5 21 7.52944 21 12.5C21 17.4706 16.9706 21.5 12 21.5Z"
-                            stroke="#F03C06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="#005EB8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <p class="text-sm md:text-base lg:text-lg font-medium">{{ item }}</p>
                 </div>

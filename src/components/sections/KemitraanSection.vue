@@ -7,6 +7,9 @@ import KemitraanSkeleton from './skeletons/KemitraanSkeleton.vue';
 import { getImageUrl } from '@/utils/imageUtils';
 import ErrorSection from './ErrorSection.vue';
 import EmptySection from './EmptySection.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
   mitra: Partner[],
@@ -115,10 +118,10 @@ const getItemsByColumn = (columnIndex: number) => {
     <div class="w-full min-h-full md:w-[30%] space-y-8">
       <div
         class="w-full h-full flex flex-col justify-center items-center text-center md:justify-center md:items-start md:text-left gap-3">
-        <Tag title="Kerjasama" />
-        <Title title="Kemitraan Strategis" />
+        <Tag :title="langStore.t('mitra.tag')" />
+        <Title :title="langStore.t('mitra.title')" />
         <Subtitle color="text-black"
-          text="Kolaborasi dengan institusi terkemuka untuk relevansi kurikulum dan karier." />
+          :text="langStore.t('mitra.subtitle')" />
       </div>
     </div>
   </section>

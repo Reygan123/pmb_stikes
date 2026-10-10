@@ -1,34 +1,10 @@
 <script setup lang="ts">
-import { useIdentityStore } from '@/stores/identity';
-import { onMounted, computed } from 'vue';
-
-const identityStore = useIdentityStore()
-
-onMounted(() => {
-    identityStore.identity
-})
-
-const phoneNumber = computed(() => {
-    return identityStore.identity[0]?.phone || ''
-})
-
-const defaultMessage = computed(() => {
-   return encodeURIComponent('Halo, saya ingin bertanya mengenai Pendaftaran Mahasiswa Baru (PMB) Universitas BTH.')
-})
-
-const whatsappUrl = computed(() => {
-  const cleanPhone = phoneNumber.value.replace(/\D/g, '');
-  return `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${defaultMessage.value}`;
-});
 </script>
 
 <template>
     <div>
         <a 
-            v-if="phoneNumber"
-            :href="whatsappUrl" 
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#" 
             class="whatsapp-float"
             aria-label="Chat via WhatsApp"
         >
@@ -59,9 +35,18 @@ const whatsappUrl = computed(() => {
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1000;
     text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-float:active {
+    transform: scale(0.95);
 }
 
 .whatsapp-icon {

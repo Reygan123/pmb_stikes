@@ -16,10 +16,10 @@ onMounted(() => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "PMB Universitas BTH adalah platform revolusioner yang menggabungkan teknologi mutakhir dengan layanan psikologi profesional untuk membantu individu, keluarga, institusi pendidikan, dan perusahaan memahami potensi diri, meningkatkan kualitas hidup, dan membangun sumber daya manusia yang berdaya saing."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "PMB STIKes Budi Luhur Cimahi adalah portal resmi penerimaan mahasiswa baru STIKes Budi Luhur Cimahi untuk mencetak tenaga kesehatan unggul, mandiri, dan berkarakter."
 };
 
 useHead({
@@ -34,10 +34,10 @@ useHead({
 
 <template>
     <SeoMeta title="Akreditasi"
-        description="Lihat status akreditasi institusi dan program studi di Universitas BTH. Jaminan kualitas pendidikan untuk masa depan Anda."
-        keywords="Akreditasi BTH, Akreditasi Institusi, Akreditasi Prodi, Kualitas Pendidikan" :meta-tags="[
+        description="Lihat status akreditasi institusi dan program studi di STIKes Budi Luhur Cimahi. Jaminan kualitas pendidikan untuk masa depan Anda."
+        keywords="Akreditasi STIKes, Akreditasi STIKes Budi Luhur, Akreditasi Institusi, Akreditasi LAM-PTKes, Kualitas Pendidikan" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
     <MainLayout>
         <AkreditasiHeader />

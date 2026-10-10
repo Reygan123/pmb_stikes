@@ -51,7 +51,7 @@ const navigateToJalur = () => {
                     <Subtitle color="text-white" :text="description" />
                 </div>
                 <div class="flex items-center gap-4">
-                    <Button onclick="window.open('http://pendaftaran.universitas-bth.ac.id/', '_blank')"
+                    <Button onclick="window.open('https://stikesbudiluhurcimahi.ac.id/', '_blank')"
                         :text="'Daftar Sekarang'" />
                     <Button @click="navigateToJalur" bg-color="bg-primary/20" text-color="text-primary"
                         text="Cek Jalur & Jadwal" />
@@ -66,7 +66,7 @@ const navigateToJalur = () => {
                 <h1 class="text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-gstart to-gend">
                     {{ title }}</h1>
                 <Subtitle color="text-gstart" :text="description" />
-                <Button onclick="window.open('http://pendaftaran.universitas-bth.ac.id/', '_blank')"
+                <Button onclick="window.open('https://stikesbudiluhurcimahi.ac.id/', '_blank')"
                     :text="'Daftar Sekarang'" weight="font-normal" />
             </div>
         </div>

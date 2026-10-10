@@ -70,7 +70,7 @@ const navigateToDetailProdi = (slug: string) => {
                 </div>
             </div>
             <div class="w-[20%] h-fit flex justify-end items-end-safe mt-auto gap-4">
-                <a href="https://pendaftaran.universitas-bth.ac.id/" target="_blank" class="text-base md:text-lg lg:text-[22px] text-gstart text-right underline">
+                <a href="https://stikesbudiluhurcimahi.ac.id/" target="_blank" class="text-base md:text-lg lg:text-[22px] text-gstart text-right underline">
                     Mulai Karirmu <br /> Disini</a>
             </div>
         </div>

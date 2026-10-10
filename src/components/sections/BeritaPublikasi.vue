@@ -18,7 +18,7 @@ onMounted(()=>{
         <div class="flex flex-col gap-4 justify-center items-center text-center">
             <Tag title="Berita" />
             <Title title="Publikasi dan Berita Institusional" />
-            <Subtitle text="Artikel, berita, dan wawasan terkini dari civitas akademik BTH." />
+            <Subtitle text="Artikel, berita, dan wawasan terkini dari civitas akademik STIKes Budi Luhur Cimahi." />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

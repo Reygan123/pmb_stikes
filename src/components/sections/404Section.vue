@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Maskot from '@/assets/vector/maskot-404.webp'
+import Logo from '@/assets/logo/logo.png';
 import Title from '../ui/Title.vue';
 import { useRouter } from 'vue-router';
 import Button from '../ui/Button.vue';
@@ -13,9 +13,8 @@ const goHome = () => {
 <template>
     <section
         class="w-full min-h-screen px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col justify-center items-center text-center gap-6 md:gap-8">
-        <div class="">
-            <img :src="Maskot" alt="Maskot BTH Bingung"
-                class="w-56 h-56 md:w-60 md:h-60 lg:w-72 lg:h-72 xl:w-80 xl:h-80 object-contain animate-fade-in">
+        <div class="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center animate-fade-in">
+            <img :src="Logo" alt="Logo STIKes Budi Luhur Cimahi" class="w-full h-full object-contain drop-shadow-md">
         </div>
 
         <div class="space-y-3 md:space-y-4 animate-slide-up">

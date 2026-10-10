@@ -8,6 +8,9 @@ import Title from '@/components/ui/Title.vue';
 import type { Organization } from '@/core/types/organisasi';
 import { getImageUrl } from '@/utils/imageUtils';
 import { ref, watch, computed } from 'vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     organisasi: Organization[],
@@ -65,10 +68,12 @@ watch(() => props.organisasi, (newOrganisasi) => {
     <section v-if="!loading && !error && organisasi?.length > 0"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col gap-8 md:gap-12 lg:gap-16">
         <div class="w-full flex flex-col justify-center items-center text-center gap-4">
-            <Tag title="Kegiatan" />
-            <Title title="Temukan Passion Anda di Sini!" />
+            <Tag :title="langStore.currentLang === 'en' ? 'Student Activities' : 'Kegiatan'" />
+            <Title :title="langStore.currentLang === 'en' ? 'Discover Your True Passion Here!' : 'Temukan Passion Anda di Sini!'" />
             <Subtitle class="text-center"
-                text="Apapun minat Anda—seni, olahraga, kewirausahaan, atau kegiatan sosial—Universitas<br/> BTH menyediakan UKM yang tepat untuk Anda jelajahi." />
+                :text="langStore.currentLang === 'en' 
+                    ? 'Whatever your passions—arts, sports, entrepreneurship, or community healthcare service—STIKes Budi Luhur Cimahi provides the ideal platforms to flourish.' 
+                    : 'Apapun minat Anda—seni, olahraga, kewirausahaan, atau kegiatan sosial—STIKes Budi Luhur Cimahi menyediakan wadah kegiatan mahasiswa yang tepat untuk Anda jelajahi.'" />
         </div>
 
         <div class="w-full space-y-8">
@@ -78,7 +83,7 @@ watch(() => props.organisasi, (newOrganisasi) => {
                     class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="activeCategory === category ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="setActiveCategory(category || 'All')">
-                    <p class="text-sm md:text-base lg:text-lg">{{ category }}</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.loc(category) }}</p>
                 </div>
             </div>
 
@@ -88,7 +93,7 @@ watch(() => props.organisasi, (newOrganisasi) => {
                     class="py-2 px-3 lg:py-3 lg:px-6 rounded-full group flex-shrink-0 transition-all duration-500 cursor-pointer"
                     :class="activeOrganization === organisasi ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500 hover:bg-primary hover:text-white'"
                     @click="setActiveOrganization(organisasi || 'All')">
-                    <p class="text-sm md:text-base lg:text-lg">{{ organisasi.title }}</p>
+                    <p class="text-sm md:text-base lg:text-lg">{{ langStore.loc(organisasi.title, organisasi.title_en) }}</p>
                 </div>
             </div>
 
@@ -100,19 +105,19 @@ watch(() => props.organisasi, (newOrganisasi) => {
                                 class="cursor-pointer transition-all duration-300"
                                 :class="activeOrganization?.id === item.id ? 'opacity-100' : 'opacity-40 hover:opacity-70'"
                                 @click="setActiveOrganization(item)">
-                                <h4 class="text-sm md:text-base xl:text-lg font-medium">{{ item.title }}</h4>
+                                <h4 class="text-sm md:text-base xl:text-lg font-medium">{{ langStore.loc(item.title, item.title_en) }}</h4>
                             </div>
                         </div>
-                        <h4 class="text-sm md:text-base xl:text-lg font-medium">{{ activeOrganization?.kategori?.title
+                        <h4 class="text-sm md:text-base xl:text-lg font-medium">{{ langStore.loc(activeOrganization?.kategori?.title)
                             }}</h4>
                     </div>
 
                     <div class="w-full h-full grid grid-cols-2 gap-6">
                         <div class="w-full h-[340px] lg:h-[420px] xl:h-[540px] flex flex-col justify-between gap-6">
                             <div class="text-netral text-sm md:text-base lg:text-xl xl:text-xl">
-                                <p class="text-sm md:text-base lg:text-lg xl:text-xl"
-                                    v-html="activeOrganization?.description">
-                                </p>
+                                 <p class="text-sm md:text-base lg:text-lg xl:text-xl"
+                                     v-html="langStore.loc(activeOrganization?.description, activeOrganization?.description_en)">
+                                 </p>
                             </div>
                             <div class="w-full h-fit rounded-4xl overflow-hidden">
                                 <img :src="getImageUrl(`organisasi/${activeOrganization?.image}`)"
@@ -134,8 +139,8 @@ watch(() => props.organisasi, (newOrganisasi) => {
 
                 <div class="w-full h-full space-y-4 md:hidden">
                     <div class="space-y-2">
-                        <h3 class="text-lg text-gstart font-medium">{{ activeOrganization?.title }}</h3>
-                        <p class="text-sm text-black/40" v-html="activeOrganization?.description">
+                        <h3 class="text-lg text-gstart font-medium">{{ langStore.loc(activeOrganization?.title, activeOrganization?.title_en) }}</h3>
+                        <p class="text-sm text-black/40" v-html="langStore.loc(activeOrganization?.description, activeOrganization?.description_en)">
                         </p>
                     </div>
 

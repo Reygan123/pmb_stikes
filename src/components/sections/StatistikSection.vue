@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { Statistik } from '@/core/types/statistik'
 import { ref, onMounted, watch } from 'vue'
+import { useLanguageStore } from '@/stores/language'
 
+const langStore = useLanguageStore()
 const alumniCount = ref(0)
 const mahasiswaCount = ref(0)
 const prestasiCount = ref(0)
@@ -68,28 +70,28 @@ watch(() => props.statistik, (newValue) => {
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(alumniCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ statistik?.title1 }}</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ langStore.currentLang === 'en' ? 'Graduates' : (statistik?.title1 || 'Alumni') }}</p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(mahasiswaCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ statistik?.title2 }}</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ langStore.currentLang === 'en' ? 'Active Students' : (statistik?.title2 || 'Mahasiswa') }}</p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(prestasiCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ statistik?.title3 }}</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ langStore.currentLang === 'en' ? 'Achievements' : (statistik?.title3 || 'Prestasi') }}</p>
     </div>
     <div class="space-y-2 text-center">
       <h3
         class="text-2xl md:text-4xl lg:text-[44px] xl:text-[56px] text-primary font-medium transition-all duration-300">
         {{ formatNumber(Math.floor(prodiCount)) }}
       </h3>
-      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ statistik?.title4 }}</p>
+      <p class="text-sm md:text-base lg:text-lg text-gstart md:text-netral">{{ langStore.currentLang === 'en' ? 'Study Programs' : (statistik?.title4 || 'Program Studi') }}</p>
     </div>
   </section>
 </template>

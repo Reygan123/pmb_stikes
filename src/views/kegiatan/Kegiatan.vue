@@ -29,10 +29,10 @@ onMounted(async () => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-    "description": "Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa BTH."
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+    "description": "Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa STIKes Budi Luhur Cimahi."
 };
 
 useHead({
@@ -47,10 +47,10 @@ useHead({
 
 <template>
     <SeoMeta title="Kegiatan Mahasiswa"
-        description="Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa BTH."
-        keywords="Kegiatan Kampus, UKM BTH, Organisasi Mahasiswa, Ekstrakurikuler" :meta-tags="[
+        description="Lihat berbagai kegiatan ekstrakurikuler, organisasi, dan event yang memperkaya pengalaman akademik dan non-akademik mahasiswa STIKes Budi Luhur Cimahi."
+        keywords="Kegiatan Kampus, UKM STIKes Budi Luhur, Organisasi Mahasiswa, Ekstrakurikuler" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout position="fixed">

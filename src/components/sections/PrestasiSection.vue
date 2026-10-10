@@ -11,8 +11,10 @@ import EmptySection from './EmptySection.vue';
 import PrestasiSkeleton from './skeletons/PrestasiSkeleton.vue';
 import { useRouter } from 'vue-router';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useLanguageStore } from '@/stores/language';
 
 const router = useRouter()
+const langStore = useLanguageStore();
 
 const navigateToDetail = () => {
     router.push('/prestasi')
@@ -67,17 +69,17 @@ const SwiperSlide = defineAsyncComponent(() => import('swiper/vue').then(m => m.
         <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-center">
             <div
                 class="flex flex-col justify-center items-center text-center md:justify-start md:items-start md:text-left gap-3">
-                <Tag title="Prestasi" />
-                <Title title="Capaian dan <br/> Prestasi" />
+                <Tag :title="langStore.currentLang === 'en' ? 'Achievements' : 'Prestasi'" />
+                <Title :title="langStore.currentLang === 'en' ? 'Milestones & <br/> Achievements' : 'Capaian dan <br/> Prestasi'" />
                 <div class="md:hidden">
                     <Subtitle
-                        text="Kontribusi dan keunggulan civitas academik mahasiswa Universitas Bakti Tunas Husada" />
+                        :text="langStore.currentLang === 'en' ? 'Contributions and academic excellence achieved by STIKes Budi Luhur Cimahi students.' : 'Kontribusi dan keunggulan civitas akademika mahasiswa STIKes Budi Luhur Cimahi'" />
                 </div>
-                <Button @click="navigateToDetail" text="Selengkapnya" />
+                <Button @click="navigateToDetail" :text="langStore.t('common.read_more')" />
             </div>
 
             <div class="max-w-sm hidden md:block">
-                <Subtitle text="Kontribusi dan keunggulan civitas academik mahasiswa Universitas Bakti Tunas Husada" />
+                <Subtitle :text="langStore.currentLang === 'en' ? 'Contributions and academic excellence achieved by STIKes Budi Luhur Cimahi students.' : 'Kontribusi dan keunggulan civitas akademika mahasiswa STIKes Budi Luhur Cimahi'" />
             </div>
         </div>
 
@@ -134,8 +136,8 @@ const SwiperSlide = defineAsyncComponent(() => import('swiper/vue').then(m => m.
                         <div v-if="activeIndex === index"
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex justify-end items-end rounded-4xl">
                             <div class="h-fit p-4 text-white w-full">
-                                <h3 class="text-base md:text-lg font-medium">{{ item.title }}</h3>
-                                <p class="text-sm md:text-base">{{ item.name }}</p>
+                                <h3 class="text-base md:text-lg font-medium">{{ langStore.loc(item.title, item.title_en) }}</h3>
+                                <p class="text-sm md:text-base">{{ langStore.loc(item.name, item.name_en) }}</p>
                             </div>
                         </div>
                     </div>

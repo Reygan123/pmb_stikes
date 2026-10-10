@@ -57,9 +57,11 @@ export interface Dekan {
 export interface Unggulan {
   id: number;
   title: string;
+  title_en?: string;
   slug: string;
   image: string | null;
   description: string;
+  description_en?: string;
   link: string | null;
   program_id: number;
   home: number | null;
@@ -68,10 +70,11 @@ export interface Unggulan {
 }
 
 export interface Fasilitas {
-    title: string,
-    image: string,
-    subtitle: string,
-    description: string
+    title: string;
+    image: string;
+    image1?: string;
+    subtitle: string;
+    description: string;
 }
 
 export interface ProdiResponse {

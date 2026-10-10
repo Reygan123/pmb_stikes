@@ -5,21 +5,30 @@ import { createPinia } from 'pinia'
 import { createHead } from '@vueuse/head'
 
 import AOS from 'aos'
-import 'aos/dist/aos.css'
 
 import App from './App.vue'
 import router from './router'
+import { useLanguageStore } from './stores/language'
 
 const head = createHead()
-
 const app = createApp(App)
+const pinia = createPinia()
 
 AOS.init({
-  once: true, 
+  once: true,
+  duration: 600,
+  easing: 'ease-out-cubic',
+  offset: 40,
 });
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(head)
+
+const langStore = useLanguageStore()
+app.config.globalProperties.$t = (key: string, fallback?: string) => langStore.t(key, fallback)
+app.config.globalProperties.$lang = langStore
+app.provide('langStore', langStore)
+app.provide('t', (key: string, fallback?: string) => langStore.t(key, fallback))
 
 app.mount('#app')

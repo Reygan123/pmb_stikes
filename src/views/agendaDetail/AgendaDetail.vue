@@ -61,8 +61,8 @@ onMounted(() => {
 
 const pageTitle = computed(() => {
   return agendaStore.currentAgenda?.title
-    ? `${agendaStore.currentAgenda.title} - PMB Universitas BTH`
-    : 'Berita - PMB Universitas BTH'
+    ? `${agendaStore.currentAgenda.title} - PMB STIKes Budi Luhur Cimahi`
+    : 'Agenda - PMB STIKes Budi Luhur Cimahi'
 })
 
 useHead({
@@ -70,7 +70,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: agendaStore.currentAgenda?.title || 'Agenda terbaru dari PMB Universitas BTH'
+      content: agendaStore.currentAgenda?.title || 'Agenda terbaru dari PMB STIKes Budi Luhur Cimahi'
     }
   ],
   script: [
@@ -84,9 +84,9 @@ useHead({
 
 <template>
   <SeoMeta :title="agendaStore.currentAgenda?.title" :description="agendaStore.currentAgenda?.content"
-    keywords="Syarat Pendaftaran BTH, Prosedur PMB, Pendaftaran Kuliah" :meta-tags="[
+    keywords="Agenda STIKes Budi Luhur, Jadwal Kegiatan, PMB STIKes Cimahi" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
   <MainLayout>

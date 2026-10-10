@@ -4,6 +4,7 @@ export interface Testimonial {
   name: string;
   title: string;
   description: string;
+  content?: string;
   home?: string | null;
   yt: string;
   image: string;

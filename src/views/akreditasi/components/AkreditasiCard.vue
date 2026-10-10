@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import Button from '@/components/ui/Button.vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
+
 defineProps<{
     title: String,
     link: String
@@ -15,8 +19,8 @@ const handleDownload = (link: String) => {
 }
 </script>
 <template>
-    <div class="rounded-4xl border border-primary p-10 flex flex-col justify-center items-center text-center gap-4">
+    <div class="rounded-4xl border border-primary/40 p-10 flex flex-col justify-center items-center text-center gap-4 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg bg-white">
         <h3 class="text-xl lg:text-2xl font-semibold text-gstart">{{ title }}</h3>
-        <Button text="Download" @click="handleDownload(link)" />
+        <Button :text="langStore.currentLang === 'en' ? 'Download Certificate' : 'Unduh Dokumen'" @click="handleDownload(link)" />
     </div>
 </template>

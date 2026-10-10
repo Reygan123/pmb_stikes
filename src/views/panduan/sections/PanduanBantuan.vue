@@ -1,41 +1,36 @@
 <script setup lang="ts">
-import Maskot from '@/assets/vector/maskot-bantuan.webp'
+import Logo from '@/assets/logo/logo.png';
 import Button from '@/components/ui/Button.vue';
 import Subtitle from '@/components/ui/Subtitle.vue';
 import Tag from '@/components/ui/Tag.vue';
 import Title from '@/components/ui/Title.vue';
 import type { Identity } from '@/core/types/identity';
+import { useLanguageStore } from '@/stores/language';
 
-const props = defineProps<{
+const langStore = useLanguageStore();
+
+defineProps<{
     identity: Identity[]
-}>()
+}>();
 
 const handleWhatsApp = () => {
-  if (props.identity[0]?.phone) {
-    const message = encodeURIComponent(
-      "Halo, saya tertarik dengan program di Universitas BTH dan ingin mengetahui informasi lebih lanjut tentang jalur pendaftaran yang tersedia. Bisakah Anda membantu saya?"
-    );
-    window.location.href = `https://api.whatsapp.com/send?phone=${props.identity[0]?.phone}&text=${message}`;
-  } else {
-    alert("Nomor WhatsApp admin tidak tersedia.");
-  }
 };
 </script>
 
 <template>
     <section
-        class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col md:flex-row justify-center items-center text-center gap-4 lg:gap-6">
+        class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col md:flex-row justify-center items-center text-center md:text-left gap-6 lg:gap-12">
         <div class="w-fit">
-            <img :src="Maskot" alt="Maskot BTH"
-                class="w-64 h-64 lg:w-96 lg:h-96 xl:w-[420px] xl:h-[420px] object-contain">
+            <img :src="Logo" alt="Logo STIKes Budi Luhur Cimahi"
+                class="w-36 h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain drop-shadow-md">
         </div>
         <div class="w-fit flex flex-col items-center md:items-start space-y-6">
-            <div class="space-y-2 flex flex-col items-center md:items-start">
-                <Tag title="Bantuan"/>
-                <Title title="Butuh Bantuan?"/>
-                <Subtitle text="Tim PMB kami selalu siap membantu jika kamu menemukan kendala" />
+            <div class="space-y-2 flex flex-col items-center">
+                <Tag :title="langStore.currentLang === 'en' ? 'Help Desk' : 'Bantuan'"/>
+                <Title :title="langStore.currentLang === 'en' ? 'Need Assistance?' : 'Butuh Bantuan?'"/>
+                <Subtitle :text="langStore.currentLang === 'en' ? 'Our admissions advisory team is always ready to guide you through any questions.' : 'Tim PMB kami selalu siap membantu jika kamu menemukan kendala'" />
             </div>
-            <Button @click="handleWhatsApp" text="Tanya Admin" />
+            <Button @click="handleWhatsApp" :text="langStore.currentLang === 'en' ? 'Chat with Admissions' : 'Tanya Admin'" />
         </div>
     </section>
 </template>

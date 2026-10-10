@@ -27,7 +27,7 @@ defineProps<{
         <div class="grid gap-6 md:grid-cols-2">
             <div class="rounded-3xl border-slate-800 bg-gstart p-6 shadow-sm">
                 <h3 class="text-lg font-semibold text-white mb-2">{{ file1.name }}</h3>
-                <p class="text-sm text-slate-400 mb-6">Dokumen SOP resmi untuk proses penerimaan mahasiswa baru Universitas BTH.</p>
+                <p class="text-sm text-slate-400 mb-6">Dokumen SOP resmi untuk proses penerimaan mahasiswa baru STIKes Budi Luhur Cimahi.</p>
                 <a :href="file1.url" target="_blank" rel="noreferrer">
                     <Button text="Unduh File 1" />
                 </a>

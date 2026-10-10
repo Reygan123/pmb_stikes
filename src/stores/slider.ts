@@ -11,7 +11,24 @@ interface SliderStore {
 
 export const useSliderStore = defineStore("slider", {
   state: (): SliderStore => ({
-    sliders: [],
+    sliders: [
+      {
+        id: 1,
+        title: "Penerimaan Mahasiswa Baru STIKes Budi Luhur Cimahi",
+        slug: "pmb-stikes-budi-luhur",
+        program_id: 2,
+        image: "faculty-image/TEA25aKWZkbL1D3oiGAieMvVW2B1nxv237PJJ4f4.jpg",
+        image2: "",
+        description: "Mencetak Tenaga Kesehatan Profesional, Unggul, dan Berakhlak Mulia yang Siap Bersaing Global.",
+        align: "left",
+        button: "Daftar Sekarang",
+        link: "/pendaftaran",
+        yt_id: "KVBOdL3DUdk",
+        home: "1",
+        created_at: "",
+        updated_at: ""
+      }
+    ],
     currentSlider: [],
     loading: false,
     error: null,

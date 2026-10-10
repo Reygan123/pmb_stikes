@@ -2,7 +2,11 @@
 import EmptySection from '@/components/sections/EmptySection.vue';
 import ErrorSection from '@/components/sections/ErrorSection.vue';
 import type { Jalur } from '@/core/types/jalur';
+import { getImageUrl } from '@/utils/imageUtils';
 import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     jalur: Jalur | null,
@@ -65,9 +69,9 @@ onUnmounted(() => {
 
     <section v-if="!loading && !error && jalur !== null"
         class="px-4 py-8 md:p-8 lg:py-16 lg:px-24 flex flex-col items-center gap-8 md:gap-12 lg:gap-16">
-        <div class="w-full h-[360px] md:h-[520px] lg:h-[680px] rounded-4xl relative overflow-hidden">
+        <div class="w-full h-[360px] md:h-[520px] lg:h-[680px] rounded-4xl relative overflow-hidden shadow-md">
             <div class="w-full h-full">
-                <img src="https://cms-pmb.universitas-bth.ac.id/storage/sliders/7Tr4gJNooCvIgvfVjSrqzzhWvMxNIhBAxdzNp7BY.webp"
+                <img :src="jalur?.image1 ? getImageUrl('registration/' + jalur.image1) : getImageUrl('sliders/7Tr4gJNooCvIgvfVjSrqzzhWvMxNIhBAxdzNp7BY.webp')"
                     alt="Jalur Countdown" class="w-full h-full object-cover">
             </div>
 
@@ -75,27 +79,29 @@ onUnmounted(() => {
             <div
                 class="absolute top-6 right-6 left-6 md:left-auto md:top-8 md:right-8 lg:top-12 lg:right-12 md:w-full md:max-w-3/5 lg:max-w-3/5 xl:max-w-1/2 p-3 md:p-6 rounded-3xl border-3 border-white bg-white/30 text-white backdrop-blur-md z-10 space-y-3 md:space-y-6">
                 <div class="space-y-2">
-                    <h2 class="text-xs md:text-sm">Jangan Sampai Kesempatan Ini Terlewatkan!</h2>
-                    <h3 class="text-base md:text-lg lg:text-xl font-bold">Penutupan {{ jalur?.name }}</h3>
+                    <h2 class="text-xs md:text-sm font-semibold tracking-wide uppercase text-blue-100">
+                        {{ langStore.currentLang === 'en' ? "Don't Miss This Opportunity!" : 'Jangan Sampai Kesempatan Ini Terlewatkan!' }}
+                    </h2>
+                    <h3 class="text-base md:text-lg lg:text-xl font-bold">
+                        {{ langStore.currentLang === 'en' ? `Registration Deadline for ${langStore.loc(jalur?.name, jalur?.name_en)}` : `Batas Pendaftaran ${jalur?.name}` }}
+                    </h3>
                 </div>
                 <div class="w-full grid grid-cols-4 gap-4 xs:grid-cols-4 sm:grid-cols-4">
                     <div class="text-center">
                         <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ days }}</h4>
-                        <h5 class="text-lg md:text-xl lg:text-[28px] leading-tight">Hari</h5>
+                        <h5 class="text-sm md:text-xl lg:text-[24px] leading-tight">{{ langStore.currentLang === 'en' ? 'Days' : 'Hari' }}</h5>
                     </div>
                     <div class="text-center">
                         <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ hours }}</h4>
-                        <h5 class="text-lg md:text-xl lg:text-[28px] leading-tight">Jam</h5>
+                        <h5 class="text-sm md:text-xl lg:text-[24px] leading-tight">{{ langStore.currentLang === 'en' ? 'Hours' : 'Jam' }}</h5>
                     </div>
                     <div class="text-center">
-                        <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ minutes }}
-                        </h4>
-                        <h5 class="text-lg md:text-xl lg:text-[28px] leading-tight">Menit</h5>
+                        <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ minutes }}</h4>
+                        <h5 class="text-sm md:text-xl lg:text-[24px] leading-tight">{{ langStore.currentLang === 'en' ? 'Minutes' : 'Menit' }}</h5>
                     </div>
                     <div class="text-center">
-                        <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ seconds }}
-                        </h4>
-                        <h5 class="text-lg md:text-xl lg:text-[28px] leading-tight">Detik</h5>
+                        <h4 class="text-[48px] md:text-[72px] lg:text-[96px] font-medium leading-tight">{{ seconds }}</h4>
+                        <h5 class="text-sm md:text-xl lg:text-[24px] leading-tight">{{ langStore.currentLang === 'en' ? 'Seconds' : 'Detik' }}</h5>
                     </div>
                 </div>
             </div>

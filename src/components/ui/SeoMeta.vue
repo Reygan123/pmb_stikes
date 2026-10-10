@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
-import Logo from '@/assets/logo/logo-bth.webp'
+import Logo from '@/assets/logo/logo.png'
 
 interface MetaTag {
   name?: string
@@ -20,7 +20,7 @@ const props = defineProps<{
   metaTags?: MetaTag[]
 }>()
 
-const appName = import.meta.env.VITE_APP_NAME || 'PMB Universitas BTH'
+const appName = import.meta.env.VITE_APP_NAME || 'PMB STIKes Budi Luhur Cimahi'
 
 useHead({
   title: props.title ? `${props.title} - ${appName}` : appName,

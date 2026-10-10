@@ -2,7 +2,7 @@
 import { useHead } from '@vueuse/head';
 import FakultasHero from './sections/FakultasDetailHero.vue';
 import AboutSection from '@/components/sections/AboutSection.vue';
-import PendaftaranSection from '@/components/sections/PendaftaranSection.vue';
+// import PendaftaranSection from '@/components/sections/PendaftaranSection.vue';
 import KemitraanSection from '@/components/sections/KemitraanSection.vue';
 import FasilitasSection from '@/components/sections/FasilitasSection.vue';
 import PublikasiSection from '@/components/sections/PublikasiSection.vue';
@@ -74,10 +74,10 @@ onMounted(async () => {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "PMB Universitas BTH",
-  "url": "https://admisi.universitas-bth.ac.id/",
-  "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
-  "description": "Informasi mendalam tentang Fakultas, Program Studi, dosen, dan prospek karir di Universitas BTH."
+  "name": "PMB STIKes Budi Luhur Cimahi",
+  "url": "https://stikesbudiluhurcimahi.ac.id/",
+  "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
+  "description": "Informasi mendalam tentang Program Studi, dosen, dan prospek karir di STIKes Budi Luhur Cimahi."
 };
 
 useHead({
@@ -91,11 +91,11 @@ useHead({
 </script>
 
 <template>
-  <SeoMeta title="Beranda"
-    description="Informasi mendalam tentang Fakultas, Program Studi, dosen, dan prospek karir di Universitas BTH."
-    keywords="Fakultas BTH, Info Program Studi, Prospek Karir" :meta-tags="[
+  <SeoMeta :title="fakultasStore.currentFakultas?.fakultas?.name || 'Detail Program Studi'"
+    description="Informasi mendalam tentang Program Studi, dosen, dan prospek karir di STIKes Budi Luhur Cimahi."
+    keywords="Program Studi STIKes Budi Luhur, Info Program Studi, Prospek Karir Kesehatan" :meta-tags="[
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:creator', content: '@bth_university' }
+      { name: 'twitter:creator', content: '@stikesbudiluhur' }
     ]" />
 
   <MainLayout position="fixed">
@@ -114,7 +114,7 @@ useHead({
       :title="fakultasStore.currentFakultas?.fakultas.title2 || ''"
       :prodi="fakultasStore.currentFakultas?.departements || []"
       :fakultas="fakultasStore.currentFakultas?.fakultas.name || ''" />
-    <PendaftaranSection />
+    <!-- <PendaftaranSection /> -->
     <FakultasMengapa v-if="uspStore.unggulanFakultas && uspStore.unggulanFakultas.length > 0" :loading="uspStore.loading" :error="uspStore.error" :name="fakultasStore.currentFakultas?.fakultas.name || ''" :usp="uspStore.unggulanFakultas.slice(0, 6)" />
     <KemitraanSection v-if="partnerStore.partners && partnerStore.partners.length > 0" :loading="partnerStore.loading" :error="partnerStore.error" :mitra="partnerStore.partners" />
     <!-- <FakultasPrestasi :loading="prestasiStore.loading" :error="prestasiStore.error"

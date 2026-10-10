@@ -8,6 +8,9 @@ import BeritaHeroSkeleton from '@/components/sections/skeletons/BeritaHeroSkelet
 import { useRouter } from 'vue-router';
 import type { Post } from '@/core/types/post';
 import { computed } from 'vue';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     berita: Post[],
@@ -42,22 +45,7 @@ const navigateToDetail = () => {
 }
 
 const formatDate = (dateString: string | undefined): string => {
-    if (!dateString) return '';
-    
-    const parts = dateString.split('-');
-    if (parts.length !== 3) return dateString;
-
-    const [year, month, day] = parts;
-    const monthNames = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-
-    const monthIndex = parseInt(month, 10) - 1;
-
-    if (monthIndex < 0 || monthIndex > 11) return dateString;
-
-    return `${day} ${monthNames[monthIndex]} ${year}`;
+    return langStore.formatDate(dateString);
 }
 </script>
 
@@ -84,11 +72,11 @@ const formatDate = (dateString: string | undefined): string => {
 
             <div class="w-full h-full md:w-[40%] flex flex-col justify-between items-start gap-4">
                 <div class="space-y-6">
-                    <Tag color="text-primary" :title="latestBerita.category.name" />
+                    <Tag color="text-primary" :title="langStore.loc(latestBerita.category.name)" />
                     <div class="space-y-4">
                         <h3
                             class="line-clamp-2 text-lg md:text-lg lg:text-xl xl:text-2xl font-medium text-left text-transparent bg-clip-text bg-gradient-to-r from-white to-[#999999]">
-                            {{ latestBerita.title }}
+                            {{ langStore.loc(latestBerita.title, latestBerita.title_en) }}
                         </h3>
 
                         <div class="flex items-center gap-4">
@@ -104,7 +92,7 @@ const formatDate = (dateString: string | undefined): string => {
                             v-html="latestBerita.description"></p>
                     </div>
                 </div>
-                <Button @click="navigateToDetail" text="Baca Selengkapnya" />
+                <Button @click="navigateToDetail" :text="langStore.t('common.read_more')" />
             </div>
         </div>
     </section>

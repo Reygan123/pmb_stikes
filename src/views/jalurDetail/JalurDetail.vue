@@ -6,7 +6,7 @@ import JalurDetailAbout from './sections/JalurDetailAbout.vue';
 import JalurDetailMengapa from './sections/JalurDetailKeunggulan.vue';
 import FaqAkademik from '../akademik/sections/FaqAkademik.vue';
 import JalurDetailSyarat from './sections/JalurDetailSyarat.vue';
-import JalurDetailLangkah from './sections/JalurDetailLangkah.vue';
+// import JalurDetailLangkah from './sections/JalurDetailLangkah.vue';
 import MainLayout from '@/components/layouts/MainLayout.vue';
 import { useRoute } from 'vue-router';
 import { useJalurStore } from '@/stores/jalur';
@@ -29,9 +29,9 @@ onMounted(() => {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "PMB Universitas BTH",
-    "url": "https://admisi.universitas-bth.ac.id/",
-    "logo": "https://admisi.universitas-bth.ac.id/assets/logo-bth-Dytwawg6.webp",
+    "name": "PMB STIKes Budi Luhur Cimahi",
+    "url": "https://stikesbudiluhurcimahi.ac.id/",
+    "logo": "https://stikesbudiluhurcimahi.ac.id/logo.png",
     "description": jalurStore.currentJalur?.content
 };
 
@@ -41,26 +41,26 @@ const faqStructuredData = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di Universitas BTH?",
+            "name": "Bagaimana cara mendaftar sebagai mahasiswa baru di STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi pmb.universitas-bth.ac.id dengan mengisi formulir dan mengunggah berkas yang diperlukan."
+                "text": "Pendaftaran dapat dilakukan secara online melalui website resmi pmb atau langsung mendatangi sekretariat PMB STIKes Budi Luhur Cimahi."
             }
         },
         {
             "@type": "Question",
-            "name": "Apa saja syarat pendaftaran PMB Universitas BTH?",
+            "name": "Apa saja syarat pendaftaran PMB STIKes Budi Luhur Cimahi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Syarat pendaftaran meliputi scan ijazah/raport, kartu keluarga, pas foto terbaru, dan biaya pendaftaran sesuai jalur yang dipilih."
+                "text": "Syarat pendaftaran meliputi scan ijazah/raport, kartu keluarga, pas foto terbaru, dan berkas persyaratan sesuai jalur yang dipilih."
             }
         },
         {
             "@type": "Question",
-            "name": "Apakah Universitas BTH sudah terakreditasi?",
+            "name": "Apakah STIKes Budi Luhur Cimahi sudah terakreditasi?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ya, Universitas BTH dan seluruh program studinya telah terakreditasi oleh BAN-PT dan LAM-PTKes."
+                "text": "Ya, STIKes Budi Luhur Cimahi dan seluruh program studinya telah terakreditasi oleh BAN-PT dan LAM-PTKes."
             }
         }
     ]
@@ -82,9 +82,9 @@ useHead({
 
 <template>
     <SeoMeta :title="jalurStore.currentJalur?.name" :description="jalurStore.currentJalur?.content"
-        keywords="Syarat Pendaftaran BTH, Prosedur PMB, Pendaftaran Kuliah" :meta-tags="[
+        keywords="Syarat Pendaftaran STIKes, Prosedur PMB STIKes, Pendaftaran Kuliah STIKes Budi Luhur" :meta-tags="[
             { property: 'og:type', content: 'website' },
-            { name: 'twitter:creator', content: '@bth_university' }
+            { name: 'twitter:creator', content: '@stikesbudiluhur' }
         ]" />
 
     <MainLayout>
@@ -94,7 +94,7 @@ useHead({
         <JalurDetailSyarat :loading="jalurStore.loading" :error="jalurStore.error" :jalur="jalurStore.currentJalur" />
         <JalurDetailCountdown :loading="jalurStore.loading" :error="jalurStore.error"
             :jalur="jalurStore.currentJalur" />
-        <JalurDetailLangkah :jalur="jalurStore.currentJalur" />
+        <!-- <JalurDetailLangkah :jalur="jalurStore.currentJalur" /> -->
         <KalenderAkademik :loading="akademikStore.loading" :error="akademikStore.error"
             :akademik="akademikStore.akademik" />
         <FaqAkademik />

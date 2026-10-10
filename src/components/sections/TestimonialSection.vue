@@ -11,8 +11,9 @@ import ErrorSection from './ErrorSection.vue';
 import EmptySection from './EmptySection.vue';
 import Title from '../ui/Title.vue';
 import Subtitle from '../ui/Subtitle.vue';
-// import Button from '../ui/Button.vue';
-// import { useRouter } from 'vue-router';
+import { useLanguageStore } from '@/stores/language';
+
+const langStore = useLanguageStore();
 
 const props = defineProps<{
     testimoni: Testimonial[],
@@ -90,11 +91,9 @@ const modules = [Navigation, Pagination, Autoplay];
         class="px-4 md:p-0 lg:py-16 lg:pl-24 lg:pr-0 flex flex-col lg:flex-row gap-16">
         <div
             class="w-full md:w-1/2 flex flex-col justify-center items-center text-center md:justify-start md:items-start md:text-start gap-4">
-            <Tag title="Testimoni" />
-            <Title title="Apa Kata Mereka Tentang Universitas BTH" />
-            <Subtitle
-                text="Temukan bagaimana pengalaman belajar di Universitas BTH membentuk mahasiswa yang siap berinovasi, berkontribusi, dan bersaing ditingkat global." />
-            <!-- <Button @click="navigateToTestimoni" text="Lihat Semua" /> -->
+            <Tag :title="langStore.t('testimoni.tag')" />
+            <Title :title="langStore.t('testimoni.title')" />
+            <Subtitle :text="langStore.t('testimoni.subtitle')" />
         </div>
 
         <div class="w-full md:w-1/2 space-y-14 hidden lg:block">
@@ -111,7 +110,7 @@ const modules = [Navigation, Pagination, Autoplay];
                             }">
                         <div class="w-[40%] space-y-4">
                             <div>
-                                <img :src="getImageUrl(`/testimonies/${item.image}`)" :alt="item.name" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover">
+                                <img :src="getImageUrl(`/testimonies/${item.image}`)" :alt="item.name" loading="lazy" decoding="async" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover">
                             </div>
                             <div class="space-y-1">
                                 <h3 class="text-lg text-primary text-medium" v-html="item.name"></h3>
@@ -124,31 +123,31 @@ const modules = [Navigation, Pagination, Autoplay];
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M10.6767 4.31208C11.0932 3.03009 12.9069 3.03009 13.3235 4.31208L14.4993 7.93108C14.6856 8.5044 15.2199 8.89257 15.8227 8.89257H19.628C20.9759 8.89257 21.5364 10.6175 20.4459 11.4098L17.3674 13.6465C16.8797 14.0008 16.6756 14.6289 16.8619 15.2022L18.0378 18.8212C18.4543 20.1032 16.987 21.1692 15.8965 20.3769L12.818 18.1403C12.3303 17.7859 11.6699 17.7859 11.1822 18.1403L8.10367 20.3769C7.01315 21.1692 5.54585 20.1032 5.96239 18.8212L7.13828 15.2022C7.32456 14.6289 7.12049 14.0008 6.63279 13.6465L3.55429 11.4098C2.46376 10.6175 3.02421 8.89257 4.37218 8.89257H8.17742C8.78025 8.89257 9.31452 8.5044 9.50081 7.93108L10.6767 4.31208Z"
-                                        fill="#F03C06" />
+                                        fill="#005EB8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M10.6767 4.31208C11.0932 3.03009 12.9069 3.03009 13.3235 4.31208L14.4993 7.93108C14.6856 8.5044 15.2199 8.89257 15.8227 8.89257H19.628C20.9759 8.89257 21.5364 10.6175 20.4459 11.4098L17.3674 13.6465C16.8797 14.0008 16.6756 14.6289 16.8619 15.2022L18.0378 18.8212C18.4543 20.1032 16.987 21.1692 15.8965 20.3769L12.818 18.1403C12.3303 17.7859 11.6699 17.7859 11.1822 18.1403L8.10367 20.3769C7.01315 21.1692 5.54585 20.1032 5.96239 18.8212L7.13828 15.2022C7.32456 14.6289 7.12049 14.0008 6.63279 13.6465L3.55429 11.4098C2.46376 10.6175 3.02421 8.89257 4.37218 8.89257H8.17742C8.78025 8.89257 9.31452 8.5044 9.50081 7.93108L10.6767 4.31208Z"
-                                        fill="#F03C06" />
+                                        fill="#005EB8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M10.6767 4.31208C11.0932 3.03009 12.9069 3.03009 13.3235 4.31208L14.4993 7.93108C14.6856 8.5044 15.2199 8.89257 15.8227 8.89257H19.628C20.9759 8.89257 21.5364 10.6175 20.4459 11.4098L17.3674 13.6465C16.8797 14.0008 16.6756 14.6289 16.8619 15.2022L18.0378 18.8212C18.4543 20.1032 16.987 21.1692 15.8965 20.3769L12.818 18.1403C12.3303 17.7859 11.6699 17.7859 11.1822 18.1403L8.10367 20.3769C7.01315 21.1692 5.54585 20.1032 5.96239 18.8212L7.13828 15.2022C7.32456 14.6289 7.12049 14.0008 6.63279 13.6465L3.55429 11.4098C2.46376 10.6175 3.02421 8.89257 4.37218 8.89257H8.17742C8.78025 8.89257 9.31452 8.5044 9.50081 7.93108L10.6767 4.31208Z"
-                                        fill="#F03C06" />
+                                        fill="#005EB8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M10.6767 4.31208C11.0932 3.03009 12.9069 3.03009 13.3235 4.31208L14.4993 7.93108C14.6856 8.5044 15.2199 8.89257 15.8227 8.89257H19.628C20.9759 8.89257 21.5364 10.6175 20.4459 11.4098L17.3674 13.6465C16.8797 14.0008 16.6756 14.6289 16.8619 15.2022L18.0378 18.8212C18.4543 20.1032 16.987 21.1692 15.8965 20.3769L12.818 18.1403C12.3303 17.7859 11.6699 17.7859 11.1822 18.1403L8.10367 20.3769C7.01315 21.1692 5.54585 20.1032 5.96239 18.8212L7.13828 15.2022C7.32456 14.6289 7.12049 14.0008 6.63279 13.6465L3.55429 11.4098C2.46376 10.6175 3.02421 8.89257 4.37218 8.89257H8.17742C8.78025 8.89257 9.31452 8.5044 9.50081 7.93108L10.6767 4.31208Z"
-                                        fill="#F03C06" />
+                                        fill="#005EB8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path
                                         d="M10.6767 4.31208C11.0932 3.03009 12.9069 3.03009 13.3235 4.31208L14.4993 7.93108C14.6856 8.5044 15.2199 8.89257 15.8227 8.89257H19.628C20.9759 8.89257 21.5364 10.6175 20.4459 11.4098L17.3674 13.6465C16.8797 14.0008 16.6756 14.6289 16.8619 15.2022L18.0378 18.8212C18.4543 20.1032 16.987 21.1692 15.8965 20.3769L12.818 18.1403C12.3303 17.7859 11.6699 17.7859 11.1822 18.1403L8.10367 20.3769C7.01315 21.1692 5.54585 20.1032 5.96239 18.8212L7.13828 15.2022C7.32456 14.6289 7.12049 14.0008 6.63279 13.6465L3.55429 11.4098C2.46376 10.6175 3.02421 8.89257 4.37218 8.89257H8.17742C8.78025 8.89257 9.31452 8.5044 9.50081 7.93108L10.6767 4.31208Z"
-                                        fill="#F03C06" />
+                                        fill="#005EB8" />
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-base line-clamp-[8]" v-html="item.description"></p>
+                                <p class="text-base line-clamp-[8]" v-html="item.content || item.description"></p>
                             </div>
                         </div>
                     </div>
@@ -163,7 +162,7 @@ const modules = [Navigation, Pagination, Autoplay];
         <!-- Mobile -->
         <div class="px-0 py-0 md:p-8 lg:py-16 lg:px-24 lg:hidden flex flex-col gap-8 md:gap-12 lg:gap-16">
             <div class="flex flex-col justify-center items-center text-center gap-6 px-4 md:px-0">
-                <p class="text-lg lg:text-2xl xl:text-[32px]" v-html="activeTestimonial?.description || ''">
+                <p class="text-lg lg:text-2xl xl:text-[32px]" v-html="activeTestimonial?.content || activeTestimonial?.description || ''">
                 </p>
             </div>
 
@@ -200,12 +199,12 @@ const modules = [Navigation, Pagination, Autoplay];
                     waitForTransition: true
                 }" @swiper="onSwiper" @slide-change="onSlideChange" class="w-full h-full">
                         <SwiperSlide v-for="(item, index) in testimoni" :key="index">
-                            <div class="transition-all duration-500 ease-in-out cursor-pointer w-full" :class="{
+                            <div class="transition-opacity transition-transform duration-500 ease-out cursor-pointer w-full" :class="{
                                 'h-[25vh] md:h-[15vh] lg:h-[25vh]': activeIndex !== index,
                                 'h-[35vh] md:h-[35vh] lg:h-[45vh]': activeIndex === index
                             }">
                                 <div class="w-full h-full rounded-4xl overflow-hidden">
-                                    <img :src="getImageUrl(`/testimonies/${item.image}`)" loading="lazy"
+                                    <img :src="getImageUrl(`/testimonies/${item.image}`)" loading="lazy" decoding="async" width="280" height="280"
                                         :alt="item.title" class="w-full h-full object-cover">
                                 </div>
                             </div>
